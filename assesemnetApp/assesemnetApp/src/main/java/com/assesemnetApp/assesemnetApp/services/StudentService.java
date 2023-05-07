@@ -7,4 +7,6 @@ public interface StudentService {
 
 	StudentEntity savestudent(StudentEntity student);
 
+	StudentEntity fetchByEnrollmentNameAndMobileNumber(String studentEnrollmentNo, Long studentMobileNumber);
+
 }

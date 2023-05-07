@@ -17,6 +17,12 @@ public class StudentServiceImp implements StudentService {
 		// TODO Auto-generated method stub
 		return studentRepo.save(student);
 	}
+	@Override
+	public StudentEntity fetchByEnrollmentNameAndMobileNumber(String studentEnrollmentNo, Long studentMobileNumber) {
+		// TODO Auto-generated method stub
+		return studentRepo.findByStudentEnrollmentNoAndStudentMobileNumber(studentEnrollmentNo, studentMobileNumber);
+	}
+	
 	
 	
 	
