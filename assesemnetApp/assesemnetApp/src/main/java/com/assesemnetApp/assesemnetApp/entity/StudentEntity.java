@@ -15,7 +15,7 @@ public class StudentEntity {
 	private String studentFirstname;
 	private String studentLastname;
 	private String studentEnrollmentNo;
-	private Long studentMobileNumber;
+	private Long   studentMobileNumber;
 	private String studentFatherName;
 	private String studentaddress;
 	private String studentEmail;
@@ -23,7 +23,7 @@ public class StudentEntity {
 	private String studentClientId;
 	private String studentSetAssign;
 	private String studentStatus;
-	private Long studentMarks;
+	private Long   studentMarks;
 	private String studentGender;
 	private String studentState;
 	
