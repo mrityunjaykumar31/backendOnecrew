@@ -1,5 +1,7 @@
 package com.assesemnetApp.assesemnetApp.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,15 +28,17 @@ public class StudentEntity {
 	private Long   studentMarks;
 	private String studentGender;
 	private String studentState;
+	private Date studentDob;  
 	
 	
 
 	
 	
+	
 	public StudentEntity(Long studentId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState) {
+			Long studentMarks, String studentGender, String studentState, Date studentDob) {
 		super();
 		this.studentId = studentId;
 		this.studentFirstname = studentFirstname;
@@ -51,6 +55,13 @@ public class StudentEntity {
 		this.studentMarks = studentMarks;
 		this.studentGender = studentGender;
 		this.studentState = studentState;
+		this.studentDob = studentDob;
+	}
+	public Date getStudentDob() {
+		return studentDob;
+	}
+	public void setStudentDob(Date studentDob) {
+		this.studentDob = studentDob;
 	}
 	public String getStudentEmail() {
 		return studentEmail;
@@ -153,7 +164,7 @@ public class StudentEntity {
 				+ studentaddress + ", studentEmail=" + studentEmail + ", studentBranch=" + studentBranch
 				+ ", studentClientId=" + studentClientId + ", studentSetAssign=" + studentSetAssign + ", studentStatus="
 				+ studentStatus + ", studentMarks=" + studentMarks + ", studentGender=" + studentGender
-				+ ", studentState=" + studentState + "]";
+				+ ", studentState=" + studentState + ", studentDob=" + studentDob + "]";
 	};
 	
 	
