@@ -24,6 +24,7 @@ public class StudentController {
 	@PostMapping("/students")
 	public StudentEntity saveClient(@RequestBody StudentEntity student) {
 		
+		
 		return studentService.savestudent(student);
 		
 	}
@@ -32,6 +33,12 @@ public class StudentController {
 	
 	public StudentEntity fetchByEnrollmentNameAndMobileNumber(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber ){
 		
+	//	StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
+		
+	//	if(student.isPresent())
+		
+				
+
 		return studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
 	}
 	
