@@ -21,7 +21,7 @@ public class StudentController {
 	@Autowired 
 	StudentService studentService;
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/students")
 	public StudentEntity saveClient(@RequestBody StudentEntity student) {
 		
