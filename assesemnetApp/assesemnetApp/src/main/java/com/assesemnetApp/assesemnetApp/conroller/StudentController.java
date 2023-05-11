@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assesemnetApp.assesemnetApp.entity.Client;
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
 
@@ -27,6 +28,7 @@ public class StudentController {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/students")
+	
 	public StudentEntity saveClient(@RequestBody StudentEntity student) {
 		
 		
@@ -46,6 +48,8 @@ public class StudentController {
 				
 
 		return studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
+		
+		
 	}
 	
 	
@@ -72,3 +76,4 @@ public class StudentController {
 	} }
 	
 }
+	
