@@ -5,74 +5,76 @@ import java.util.List;
 public class Question {
 	
 
-	private Long QuestionId;
-	private String QuestionName;
-	private String QuestionAnswer;
-	private String QuestionSet;
-	private String QuestionStream;
-	private String ClientId;
-	private List<Option> QuestionOptions;
+	private Long questionId;
+	private String questionName;
+	private String questionAnswer;
+	private String questionSet;
+	private String questionStream;
+	private String clientId;
+	private List<Option> questionOptions;
 	
 	public Long getQuestionId() {
-		return QuestionId;
+		return questionId;
 	}
 	public void setQuestionId(Long questionId) {
-		QuestionId = questionId;
+		this.questionId = questionId;
 	}
 	public String getQuestionName() {
-		return QuestionName;
+		return questionName;
 	}
 	public void setQuestionName(String questionName) {
-		QuestionName = questionName;
+		this.questionName = questionName;
 	}
 	public String getQuestionAnswer() {
-		return QuestionAnswer;
+		return questionAnswer;
 	}
 	public void setQuestionAnswer(String questionAnswer) {
-		QuestionAnswer = questionAnswer;
+		this.questionAnswer = questionAnswer;
 	}
 	public String getQuestionSet() {
-		return QuestionSet;
+		return questionSet;
 	}
 	public void setQuestionSet(String questionSet) {
-		QuestionSet = questionSet;
+		this.questionSet = questionSet;
 	}
 	public String getQuestionStream() {
-		return QuestionStream;
+		return questionStream;
 	}
 	public void setQuestionStream(String questionStream) {
-		QuestionStream = questionStream;
+		this.questionStream = questionStream;
 	}
 	public String getClientId() {
-		return ClientId;
+		return clientId;
 	}
 	public void setClientId(String clientId) {
-		ClientId = clientId;
+		this.clientId = clientId;
 	}
 	public List<Option> getQuestionOptions() {
-		return QuestionOptions;
+		return questionOptions;
 	}
 	public void setQuestionOptions(List<Option> questionOptions) {
-		QuestionOptions = questionOptions;
+		this.questionOptions = questionOptions;
 	}
+	
 	public Question(Long questionId, String questionName, String questionAnswer, String questionSet,
 			String questionStream, String clientId, List<Option> questionOptions) {
 		super();
-		QuestionId = questionId;
-		QuestionName = questionName;
-		QuestionAnswer = questionAnswer;
-		QuestionSet = questionSet;
-		QuestionStream = questionStream;
-		ClientId = clientId;
-		QuestionOptions = questionOptions;
+		this.questionId = questionId;
+		this.questionName = questionName;
+		this.questionAnswer = questionAnswer;
+		this.questionSet = questionSet;
+		this.questionStream = questionStream;
+		this.clientId = clientId;
+		this.questionOptions = questionOptions;
 	}
-
-	Question(){}
-	
 	@Override
 	public String toString() {
-		return "Question [QuestionId=" + QuestionId + ", QuestionName=" + QuestionName + ", QuestionAnswer="
-				+ QuestionAnswer + ", QuestionSet=" + QuestionSet + ", QuestionStream=" + QuestionStream + ", ClientId="
-				+ ClientId + ", QuestionOptions=" + QuestionOptions + "]";
+		return "Question [questionId=" + questionId + ", questionName=" + questionName + ", questionAnswer="
+				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream + ", clientId="
+				+ clientId + ", questionOptions=" + questionOptions + "]";
 	}
+	
+	Question(){};
+	
+	
 }

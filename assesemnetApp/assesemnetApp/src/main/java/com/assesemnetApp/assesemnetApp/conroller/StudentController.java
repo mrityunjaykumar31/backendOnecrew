@@ -18,6 +18,7 @@ import com.assesemnetApp.assesemnetApp.services.StudentService;
 
 
 
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 @RestController
 public class StudentController {
 
@@ -48,7 +49,7 @@ public class StudentController {
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@PutMapping("/student")
 	ResponseEntity<String> updateStudent(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber, @RequestBody StudentEntity student)   {
 		
