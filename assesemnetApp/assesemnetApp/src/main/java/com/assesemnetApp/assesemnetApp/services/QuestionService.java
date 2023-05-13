@@ -7,8 +7,8 @@ import com.assesemnetApp.assesemnetApp.model.Question;
 
 public interface QuestionService {
 	
-	Question saveQuestion (Question Question);
+	Question saveQuestion (Question Question, Long clientId);
 	
-	List<Question> findByQuestionStreamAndClientId(String questionStream, String clientId );
+	List<Question> findByQuestionStreamAndclient(String questionStream, Long clientId);
 
 }

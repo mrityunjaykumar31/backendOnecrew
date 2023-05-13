@@ -2,20 +2,25 @@ package com.assesemnetApp.assesemnetApp.model;
 
 import java.util.List;
 
+import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
+
 public class Question {
 	
 
 	private Long questionId;
+
 	private String questionName;
 	private String questionAnswer;
 	private String questionSet;
 	private String questionStream;
-	private String clientId;
+	
+	 private ClientEntity client;
 	private List<Option> questionOptions;
 	
 	public Long getQuestionId() {
 		return questionId;
 	}
+	
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
@@ -43,12 +48,6 @@ public class Question {
 	public void setQuestionStream(String questionStream) {
 		this.questionStream = questionStream;
 	}
-	public String getClientId() {
-		return clientId;
-	}
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
 	public List<Option> getQuestionOptions() {
 		return questionOptions;
 	}
@@ -56,25 +55,32 @@ public class Question {
 		this.questionOptions = questionOptions;
 	}
 	
+	
 	public Question(Long questionId, String questionName, String questionAnswer, String questionSet,
-			String questionStream, String clientId, List<Option> questionOptions) {
+			String questionStream, ClientEntity client, List<Option> questionOptions) {
 		super();
 		this.questionId = questionId;
 		this.questionName = questionName;
 		this.questionAnswer = questionAnswer;
 		this.questionSet = questionSet;
 		this.questionStream = questionStream;
-		this.clientId = clientId;
+		this.client = client;
 		this.questionOptions = questionOptions;
 	}
+	
 	@Override
 	public String toString() {
 		return "Question [questionId=" + questionId + ", questionName=" + questionName + ", questionAnswer="
-				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream + ", clientId="
-				+ clientId + ", questionOptions=" + questionOptions + "]";
+				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream + ", client="
+				+ client + ", questionOptions=" + questionOptions + "]";
 	}
-	
-	Question(){};
+	Question(){}
+	public ClientEntity getClient() {
+		return client;
+	}
+	public void setClient(ClientEntity client) {
+		this.client = client;
+	};
 	
 	
 }

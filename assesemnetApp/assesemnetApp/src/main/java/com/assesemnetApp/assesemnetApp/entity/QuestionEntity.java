@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 
@@ -25,9 +26,12 @@ public class QuestionEntity{
 	private String questionAnswer;
 	private String questionSet;
 	private String questionStream;
-	private String clientId;
 	private String questionOptions;
 	
+	
+	@ManyToOne
+	@JoinColumn(name="clientid")
+	private ClientEntity client;
 	
 	public Long getQuestionId() {
 		return questionId;
@@ -59,11 +63,13 @@ public class QuestionEntity{
 	public void setQuestionStream(String questionStream) {
 		this.questionStream = questionStream;
 	}
-	public String getClientId  () {
-		return clientId  ;
+	
+	
+	public ClientEntity getClient() {
+		return client;
 	}
-	public void setclientId  (String clientId  ) {
-		this.clientId   = clientId  ;
+	public void setClient(ClientEntity client) {
+		this.client = client;
 	}
 	public String getQuestionOptions() {
 		return questionOptions;
@@ -74,25 +80,22 @@ public class QuestionEntity{
 	@Override
 	public String toString() {
 		return "QuestionEntity [questionId=" + questionId + ", questionName=" + questionName + ", questionAnswer="
-				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream + ", clientId  ="
-				+ clientId   + ", questionOptions=" + questionOptions + ", getQuestionId()=" + getQuestionId()
-				+ ", getQuestionName()=" + getQuestionName() + ", getQuestionAnswer()=" + getQuestionAnswer()
-				+ ", getQuestionSet()=" + getQuestionSet() + ", getQuestionStream()=" + getQuestionStream()
-				+ ", getclientId  ()=" + getClientId  () + ", getQuestionOptions()=" + getQuestionOptions()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream
+				+ ", questionOptions=" + questionOptions + ", client=" + client + "]";
 	}
+	
 	public QuestionEntity(Long questionId, String questionName, String questionAnswer, String questionSet,
-			String questionStream, String clientId, String questionOptions) {
+			String questionStream, String questionOptions, ClientEntity client) {
 		super();
 		this.questionId = questionId;
 		this.questionName = questionName;
 		this.questionAnswer = questionAnswer;
 		this.questionSet = questionSet;
 		this.questionStream = questionStream;
-		this.clientId = clientId;
 		this.questionOptions = questionOptions;
+		this.client = client;
 	}
+
 	
 	QuestionEntity(){}
 }

@@ -27,21 +27,21 @@ public class QuestionController {
 	
 	
 	@PostMapping("/Question")
-	public Question savestudent(@RequestBody Question Question) {
+	public Question savestudent(@RequestParam(required=true, name = "clientId") Long clientId,@RequestBody Question Question) {
 		
-		return QuestionService.saveQuestion(Question);
+		return QuestionService.saveQuestion(Question, clientId);
 		
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/questions")
-public ResponseEntity<List<Question>> getQuestion(@RequestParam(required=false, name = "questionStream") String questionStream, @RequestParam(required=false, name ="clientId") String clientId) {
+public ResponseEntity<List<Question>> getQuestion(@RequestParam(required=false, name = "questionStream") String questionStream, @RequestParam(required=false, name ="clientId") Long clientId) {
 		
 		//return QuestionService.saveQuestion(Question);
 		
 		System.out.println(questionStream + "from controller" + clientId);
 		
-		List<Question> qe = QuestionService.findByQuestionStreamAndClientId(questionStream, clientId);
+		List<Question> qe = QuestionService.findByQuestionStreamAndclient(questionStream, clientId);
 	
 		
 		if(qe == null) {
