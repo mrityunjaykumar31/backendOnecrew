@@ -38,8 +38,8 @@ public class ClientEntity {
 	@SuppressWarnings("unchecked")
 	@OneToMany(mappedBy="questionId")
 	 List<QuestionEntity>question = new java.util.ArrayList();
-	
-	
+	@OneToMany(mappedBy="studentId")
+	 List<StudentEntity>student = new java.util.ArrayList();
 
 	public Long getClientid() {
 		return clientid;

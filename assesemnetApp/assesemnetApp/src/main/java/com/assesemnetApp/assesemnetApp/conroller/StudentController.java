@@ -29,10 +29,10 @@ public class StudentController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/students")
 	
-	public StudentEntity saveClient(@RequestBody StudentEntity student) {
+	public StudentEntity saveClient(@RequestBody StudentEntity student, Long clientId) {
 		
 		
-		return studentService.savestudent(student);
+		return studentService.savestudent(student, clientId);
 		
 	}
 	
@@ -70,7 +70,7 @@ public class StudentController {
 		
 		existingStudent.setStudentFirstname(student.getStudentFirstname());
 		
-		    studentService.savestudent(student);
+		   studentService.savestudent(student, student.getClient().getClientid());
 
 		    return ResponseEntity.ok("Student updated successfully");
 	} }

@@ -1,11 +1,16 @@
 package com.assesemnetApp.assesemnetApp.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class StudentEntity {
@@ -28,17 +33,17 @@ public class StudentEntity {
 	private Long   studentMarks;
 	private String studentGender;
 	private String studentState;
-	private Date studentDob;  
+	private Date studentDob;
 	
-	
-
-	
+	@ManyToOne
+	@JoinColumn(name="clientid")
+	private ClientEntity client;
 	
 	
 	public StudentEntity(Long studentId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState, Date studentDob) {
+			Long studentMarks, String studentGender, String studentState, Date studentDob, ClientEntity client) {
 		super();
 		this.studentId = studentId;
 		this.studentFirstname = studentFirstname;
@@ -56,7 +61,15 @@ public class StudentEntity {
 		this.studentGender = studentGender;
 		this.studentState = studentState;
 		this.studentDob = studentDob;
+		this.client = client;
 	}
+	public ClientEntity getClient() {
+		return client;
+	}
+	public void setClient(ClientEntity client) {
+		this.client = client;
+	}
+	
 	public Date getStudentDob() {
 		return studentDob;
 	}
@@ -164,7 +177,7 @@ public class StudentEntity {
 				+ studentaddress + ", studentEmail=" + studentEmail + ", studentBranch=" + studentBranch
 				+ ", studentClientId=" + studentClientId + ", studentSetAssign=" + studentSetAssign + ", studentStatus="
 				+ studentStatus + ", studentMarks=" + studentMarks + ", studentGender=" + studentGender
-				+ ", studentState=" + studentState + ", studentDob=" + studentDob + "]";
+				+ ", studentState=" + studentState + ", studentDob=" + studentDob + ", client=" + client + "]";
 	};
 	
 	
