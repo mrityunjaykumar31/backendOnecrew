@@ -1,5 +1,7 @@
 package com.assesemnetApp.assesemnetApp.conroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +23,18 @@ public class AnsweController {
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/submit")
-	public ResponseEntity<String> submitAnswer(@RequestBody Answer answer, @RequestParam(required=false, name ="clientId") Long clientId, @RequestParam(required=false, name ="studentId") Long studentId) {
+	public ResponseEntity<String> submitAnswer(@RequestBody List<Answer> answer, @RequestParam(required=false, name ="clientId") Long clientId, @RequestParam(required=false, name ="studentId") Long studentId) {
 		
-		AnswerEntity _answer	= answerService.saveAnswer(answer, clientId, studentId);
+		AnswerEntity _answer = answerService.saveAnswer(answer, clientId, studentId);
 		
 		if(_answer == null) {
 			
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Some error occured");
 		} else {
-			 return ResponseEntity.ok("Submitted successfully");
+			  return ResponseEntity.ok("Submitted successfully");
 		}
 		
-		
+		//return null;
 		
 	}
 

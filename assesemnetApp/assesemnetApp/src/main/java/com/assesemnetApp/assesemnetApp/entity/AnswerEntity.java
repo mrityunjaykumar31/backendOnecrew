@@ -21,7 +21,7 @@ public class AnswerEntity {
 	private StudentEntity student;
 	
 	private String answer;
-	
+	private Long timeStamp;
 	
 	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student, String answer, Long timeStamp) {
 		super();
@@ -47,7 +47,7 @@ public class AnswerEntity {
 		this.timeStamp = timeStamp;
 	}
 
-	private Long timeStamp;
+	
 	
 	@Override
 	public String toString() {
@@ -56,7 +56,7 @@ public class AnswerEntity {
 	}
 
 
-	AnswerEntity(){}
+	public AnswerEntity(){}
 	public AnswerEntity(StudentEntity student2, Answer answer2) {
 		// TODO Auto-generated constructor stub
 	}
