@@ -1,5 +1,7 @@
 package com.assesemnetApp.assesemnetApp.conroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
+import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
 
 
@@ -75,5 +78,14 @@ public class StudentController {
 		    return ResponseEntity.ok("Student updated successfully");
 	} }
 	
+	
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/student")
+	List<StudentEntity>saveStudents(@RequestBody List<student> students) {
+			
+		return studentService.saveStudents(students);
+		
+	}
 }
 	
