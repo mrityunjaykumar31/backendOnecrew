@@ -16,5 +16,4 @@ public interface StudentService {
 
 	List<StudentEntity> saveStudents(List<student> students);
 	
-
 }

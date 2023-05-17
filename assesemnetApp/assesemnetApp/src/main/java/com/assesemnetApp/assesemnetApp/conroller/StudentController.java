@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
+import com.assesemnetApp.assesemnetApp.model.StudentResponseModel;
 import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
 
@@ -39,26 +40,35 @@ public class StudentController {
 		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@GetMapping("/student-loging")
-	
-	public StudentEntity fetchByEnrollmentNameAndMobileNumber(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber ){
+	public ResponseEntity<StudentResponseModel> fetchByEnrollmentNameAndMobileNumber(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber ){
 		
-	//	StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
-		
-	//	if(student.isPresent())
-		
-				
-
-		return studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
-		
+		StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
+		StudentResponseModel res = new StudentResponseModel();
+		if(student == null) {
+			res.setMessage("User not found");
+			res.setSuccess(false);
+			res.setStudentDetails(null);
+			return ResponseEntity.ok(res);
+			
+		}else {
+			res.setMessage(null);
+			res.setSuccess(true);
+			res.setStudentDetails(student);
+			 return ResponseEntity.ok(res);
+		}
 		
 	}
 	
 	
 	@CrossOrigin(origins = "*")
 	@PutMapping("/student")
-	ResponseEntity<String> updateStudent(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber, @RequestBody StudentEntity student)   {
+	ResponseEntity<String> updateStudent(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo,
+			@RequestParam("studentMobileNumber") Long studentMobileNumber,
+			@RequestParam("clientId") Long clientId,
+			@RequestBody StudentEntity student)   {
 		
 		 StudentEntity existingStudent = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
 		
@@ -73,7 +83,7 @@ public class StudentController {
 		
 		existingStudent.setStudentFirstname(student.getStudentFirstname());
 		
-		   studentService.savestudent(student, student.getClient().getClientid());
+		   studentService.savestudent(student, clientId);
 
 		    return ResponseEntity.ok("Student updated successfully");
 	} }
