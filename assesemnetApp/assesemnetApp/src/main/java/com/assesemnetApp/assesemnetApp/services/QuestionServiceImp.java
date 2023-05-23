@@ -88,6 +88,12 @@ public class QuestionServiceImp implements QuestionService {
 		//return null;
 	}
 
+	@Override
+	public List<Question> saveQuestions(List<Question> question) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

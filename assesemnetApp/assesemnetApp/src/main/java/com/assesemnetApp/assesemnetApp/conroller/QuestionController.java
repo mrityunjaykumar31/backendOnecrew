@@ -52,6 +52,16 @@ public ResponseEntity<List<Question>> getQuestion(@RequestParam(required=false, 
 		
 	} 
 	
+
+
+	@PostMapping("/questions")
+	public List<Question> savestudents(@RequestBody List<Question> Question) {
+		
+		return QuestionService.saveQuestions(Question);
+		
+	}
+	
+
 }
 
 

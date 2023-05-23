@@ -11,4 +11,6 @@ public interface QuestionService {
 	
 	List<Question> findByQuestionStreamAndclient(String questionStream, Long clientId);
 
+	List<Question> saveQuestions(List<Question> question);
+
 }

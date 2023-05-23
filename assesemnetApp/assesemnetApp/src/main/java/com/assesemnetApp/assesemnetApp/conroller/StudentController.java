@@ -19,8 +19,9 @@ import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.StudentResponseModel;
 import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 
 @CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
@@ -29,6 +30,8 @@ public class StudentController {
 
 	@Autowired 
 	StudentService studentService;
+	@Autowired
+	 private ObjectMapper jacksonObjectMapper;
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/students")
@@ -43,21 +46,49 @@ public class StudentController {
 	//@CrossOrigin(origins = "http://localhost:4200")
 	@CrossOrigin(origins = "*")
 	@GetMapping("/student-loging")
-	public ResponseEntity<StudentResponseModel> fetchByEnrollmentNameAndMobileNumber(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") Long studentMobileNumber ){
+	public ResponseEntity<String> fetchByEnrollmentNameAndMobileNumber(@RequestParam("studentEnrollmentNo") String studentEnrollmentNo, @RequestParam("studentMobileNumber") String studentMobileNumber ){
 		
-		StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, studentMobileNumber);
+		String jsonInString = null;
+			
+		
+		Long _studentMobileNumber  = null;
+		try {
+			_studentMobileNumber =  (long) Integer.parseInt(studentMobileNumber);
+			}catch(NumberFormatException nf) {
+				StudentResponseModel res = new StudentResponseModel();
+				
+					res.setMessage("User not found");
+					res.setSuccess(false);
+					res.setStudentDetails(null);
+					
+					try {
+						jsonInString = jacksonObjectMapper.writeValueAsString(res);
+					}catch(Exception e){}
+					
+					return ResponseEntity.ok(jsonInString);
+		}
+		
+		
+		StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, _studentMobileNumber);
 		StudentResponseModel res = new StudentResponseModel();
 		if(student == null) {
 			res.setMessage("User not found");
 			res.setSuccess(false);
 			res.setStudentDetails(null);
-			return ResponseEntity.ok(res);
+			try {
+				jsonInString = jacksonObjectMapper.writeValueAsString(res);
+			}catch(Exception e){}
+			
+			return ResponseEntity.ok(jsonInString);
 			
 		}else {
 			res.setMessage(null);
 			res.setSuccess(true);
 			res.setStudentDetails(student);
-			 return ResponseEntity.ok(res);
+			try {
+				jsonInString = jacksonObjectMapper.writeValueAsString(res);
+			}catch(Exception e){}
+			 return ResponseEntity.ok(jsonInString);
 		}
 		
 	}
