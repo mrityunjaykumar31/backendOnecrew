@@ -15,5 +15,11 @@ public class ClientServiceImp implements ClentService {
 		// TODO Auto-generated method stub
 		return clientRepo.save(client);
 	}
+	
+	@Override
+	public ClientEntity fetchByClientnameAndClientpassword(String clientname, String clientpassword) {
+		// TODO Auto-generated method stub
+		return clientRepo.findByClientnameAndClientpassword(clientname, clientpassword);
+	}
 
 }

@@ -6,28 +6,7 @@ public class student {
 	
 	
 	private String studentFirstname;
-	public student(String studentFirstname, String studentLastname, String studentEnrollmentNo,
-			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
-			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState, Date studentDob, Long cientId) {
-		super();
-		this.studentFirstname = studentFirstname;
-		this.studentLastname = studentLastname;
-		this.studentEnrollmentNo = studentEnrollmentNo;
-		this.studentMobileNumber = studentMobileNumber;
-		this.studentFatherName = studentFatherName;
-		this.studentaddress = studentaddress;
-		this.studentEmail = studentEmail;
-		this.studentBranch = studentBranch;
-		this.studentClientId = studentClientId;
-		this.studentSetAssign = studentSetAssign;
-		this.studentStatus = studentStatus;
-		this.studentMarks = studentMarks;
-		this.studentGender = studentGender;
-		this.studentState = studentState;
-		this.studentDob = studentDob;
-		this.cientId = cientId;
-	}
+	
 	public String getStudentFirstname() {
 		return studentFirstname;
 	}
@@ -134,15 +113,39 @@ public class student {
 	private String studentClientId;
 	private String studentSetAssign;
 	private String studentStatus;
+	 private Date examTime;
+	public student(String studentFirstname, String studentLastname, String studentEnrollmentNo,
+			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
+			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus, Date examTime,
+			Long studentMarks, String studentGender, String studentState, Date studentDob, Long cientId) {
+		super();
+		this.studentFirstname = studentFirstname;
+		this.studentLastname = studentLastname;
+		this.studentEnrollmentNo = studentEnrollmentNo;
+		this.studentMobileNumber = studentMobileNumber;
+		this.studentFatherName = studentFatherName;
+		this.studentaddress = studentaddress;
+		this.studentEmail = studentEmail;
+		this.studentBranch = studentBranch;
+		this.studentClientId = studentClientId;
+		this.studentSetAssign = studentSetAssign;
+		this.studentStatus = studentStatus;
+		this.examTime = examTime;
+		this.studentMarks = studentMarks;
+		this.studentGender = studentGender;
+		this.studentState = studentState;
+		this.studentDob = studentDob;
+		this.cientId = cientId;
+	}
 	@Override
 	public String toString() {
 		return "student [studentFirstname=" + studentFirstname + ", studentLastname=" + studentLastname
 				+ ", studentEnrollmentNo=" + studentEnrollmentNo + ", studentMobileNumber=" + studentMobileNumber
 				+ ", studentFatherName=" + studentFatherName + ", studentaddress=" + studentaddress + ", studentEmail="
 				+ studentEmail + ", studentBranch=" + studentBranch + ", studentClientId=" + studentClientId
-				+ ", studentSetAssign=" + studentSetAssign + ", studentStatus=" + studentStatus + ", studentMarks="
-				+ studentMarks + ", studentGender=" + studentGender + ", studentState=" + studentState + ", studentDob="
-				+ studentDob + ", cientId=" + cientId + "]";
+				+ ", studentSetAssign=" + studentSetAssign + ", studentStatus=" + studentStatus + ", examTime="
+				+ examTime + ", studentMarks=" + studentMarks + ", studentGender=" + studentGender + ", studentState="
+				+ studentState + ", studentDob=" + studentDob + ", cientId=" + cientId + "]";
 	}
 	private Long   studentMarks;
 	private String studentGender;
@@ -151,4 +154,10 @@ public class student {
 	private Long cientId;
 	
 	student(){}
+	public Date getExamTime() {
+		return examTime;
+	}
+	public void setExamTime(Date examTime) {
+		this.examTime = examTime;
+	}
 }

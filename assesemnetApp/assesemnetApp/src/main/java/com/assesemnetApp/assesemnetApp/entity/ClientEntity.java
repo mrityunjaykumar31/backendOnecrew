@@ -20,7 +20,15 @@ public class ClientEntity {
 	
 	private Long examDuration;
 	private Long totalQuestionTobeShown;
+	private boolean isBlocked;
 
+	
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
+	}
 	public Long getExamDuration() {
 		return examDuration;
 	}
@@ -61,21 +69,27 @@ public class ClientEntity {
 	}
 	
 	public ClientEntity(Long clientid, String clientname, String clientpassword, Long examDuration,
-			Long totalQuestionTobeShown) {
+			Long totalQuestionTobeShown, boolean isBlocked, List<QuestionEntity> question,
+			List<StudentEntity> student) {
 		super();
 		this.clientid = clientid;
 		this.clientname = clientname;
 		this.clientpassword = clientpassword;
 		this.examDuration = examDuration;
 		this.totalQuestionTobeShown = totalQuestionTobeShown;
+		this.isBlocked = isBlocked;
+		this.question = question;
+		this.student = student;
 	}
 	
 	public ClientEntity() {};
 	
 	@Override
 	public String toString() {
-		return "Client [clientid=" + clientid + ", clientname=" + clientname + ", clientpassword=" + clientpassword
-				+ ", examDuration=" + examDuration + ", totalQuestionTobeShown=" + totalQuestionTobeShown + "]";
+		return "ClientEntity [clientid=" + clientid + ", clientname=" + clientname + ", clientpassword="
+				+ clientpassword + ", examDuration=" + examDuration + ", totalQuestionTobeShown="
+				+ totalQuestionTobeShown + ", isBlocked=" + isBlocked + ", question=" + question + ", student="
+				+ student + "]";
 	}
 	
 	

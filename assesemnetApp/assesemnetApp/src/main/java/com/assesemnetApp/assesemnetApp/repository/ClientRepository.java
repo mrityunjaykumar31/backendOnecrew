@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
 
+
 @Repository
 public interface ClientRepository extends JpaRepository<ClientEntity, Long>{
-
+     
+	public ClientEntity findByClientnameAndClientpassword(String clientname, String clientpassword);
 }

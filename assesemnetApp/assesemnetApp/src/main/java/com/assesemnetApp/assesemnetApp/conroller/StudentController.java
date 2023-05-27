@@ -128,5 +128,12 @@ public class StudentController {
 		return studentService.saveStudents(students);
 		
 	}
+	
+	@PostMapping("/check-time")
+	boolean checkTime(@RequestParam String token) {
+		
+		
+		return true;
+	}
 }
 	

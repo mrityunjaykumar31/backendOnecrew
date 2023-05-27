@@ -34,16 +34,13 @@ public class StudentEntity {
 	private String studentGender;
 	private String studentState;
 	private Date studentDob;
-	
-	@ManyToOne
-	@JoinColumn(name="clientid")
-	private ClientEntity client;
-	
+	private Date examTime;
 	
 	public StudentEntity(Long studentId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState, Date studentDob, ClientEntity client) {
+			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime,
+			ClientEntity client) {
 		super();
 		this.studentId = studentId;
 		this.studentFirstname = studentFirstname;
@@ -61,8 +58,19 @@ public class StudentEntity {
 		this.studentGender = studentGender;
 		this.studentState = studentState;
 		this.studentDob = studentDob;
+		this.examTime = examTime;
 		this.client = client;
 	}
+	public Date getExamTime() {
+		return examTime;
+	}
+	public void setExamTime(Date examTime) {
+		this.examTime = examTime;
+	}
+	@ManyToOne
+	@JoinColumn(name="clientid")
+	private ClientEntity client;
+
 	public ClientEntity getClient() {
 		return client;
 	}
@@ -177,7 +185,8 @@ public class StudentEntity {
 				+ studentaddress + ", studentEmail=" + studentEmail + ", studentBranch=" + studentBranch
 				+ ", studentClientId=" + studentClientId + ", studentSetAssign=" + studentSetAssign + ", studentStatus="
 				+ studentStatus + ", studentMarks=" + studentMarks + ", studentGender=" + studentGender
-				+ ", studentState=" + studentState + ", studentDob=" + studentDob + ", client=" + client + "]";
+				+ ", studentState=" + studentState + ", studentDob=" + studentDob + ", examTime=" + examTime
+				+ ", client=" + client + "]";
 	};
 	
 	
