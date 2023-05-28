@@ -28,7 +28,7 @@ public class EmailService {
 
 
 	
-	public void sendHtmlEmail(String mailId, String title, String url, String mail) throws MessagingException {
+	public void sendHtmlEmail(String mailId, String title, String url, String mail, String pwd, String name) throws MessagingException {
 	    MimeMessage message = mailSender.createMimeMessage();
 
 	    message.setFrom(new InternetAddress(mailId));
@@ -39,9 +39,10 @@ public class EmailService {
 		//try {
 			//htmlTemplate = readFile("email-template.html");
 			// Replace placeholders in the HTML template with dynamic values
-			htmlTemplate = " <h1>Welcome!</h1>"+ "<p>Thank you for joining us. We're excited to have you on board.</p>" + "<p>Your login url: <a href=\"" + url + "\">" + url + "</a></p>" +" <p>User: ${name}</p> " + "<p>Password: ${password}</p>";
+			htmlTemplate = " <h1>Welcome!</h1>"+ "<p>Thank you for joining us. We're excited to have you on board.</p>" + "<p>Your login url: <a href=\"" + url + "\">" + url + "</a></p>" +" <p>User: ${name}</p> " + "<p>Password: ${pwd} </p>";
 		    htmlTemplate = htmlTemplate.replace("${url}",url);
-		  //  htmlTemplate = htmlTemplate.replace("${message}", "Hello, this is a test email.");
+		  htmlTemplate = htmlTemplate.replace("${pwd}", pwd);
+		  htmlTemplate = htmlTemplate.replace("${name}", name);
 		    message.setContent(htmlTemplate, "text/html; charset=utf-8");
 	//	}// catch (IOException e) {
 			// TODO Auto-generated catch block

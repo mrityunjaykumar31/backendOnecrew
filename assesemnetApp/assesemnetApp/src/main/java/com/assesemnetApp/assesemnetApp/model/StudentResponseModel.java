@@ -4,7 +4,7 @@ import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 
 public class StudentResponseModel {
 	
-	public StudentResponseModel(String message, boolean isSuccess, StudentEntity studentDetails) {
+	public StudentResponseModel(String message, boolean isSuccess, StudentDetails studentDetails) {
 		super();
 		this.message = message;
 		this.isSuccess = isSuccess;
@@ -13,7 +13,7 @@ public class StudentResponseModel {
 	private String message;
 	
 	private boolean isSuccess;
-	private StudentEntity studentDetails;
+	private StudentDetails studentDetails;
 	
 	public String getMessage() {
 		return message;
@@ -27,10 +27,10 @@ public class StudentResponseModel {
 	public void setSuccess(boolean isSuccess) {
 		this.isSuccess = isSuccess;
 	}
-	public StudentEntity getStudentDetails() {
+	public StudentDetails getStudentDetails() {
 		return studentDetails;
 	}
-	public void setStudentDetails(StudentEntity studentDetails) {
+	public void setStudentDetails(StudentDetails studentDetails) {
 		this.studentDetails = studentDetails;
 	}
 

@@ -29,7 +29,7 @@ public class EmailController {
 		String mail= "mrityunjaykumar31@gmail.com";
 		
 		try {
-			this.emailService.sendHtmlEmail("career4@prernagroup.org", title, baseUrl, mail);
+			this.emailService.sendHtmlEmail("career4@prernagroup.org", title, baseUrl, mail, null, null);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

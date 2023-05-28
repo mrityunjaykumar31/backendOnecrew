@@ -2,7 +2,8 @@ package com.assesemnetApp.assesemnetApp.model;
 
 import java.sql.Date;
 
-public class student {
+public class StudentDetails {
+	private Long studentId;
 	private Long cientId;
 	private String studentFirstname;
 	private String studentLastname;
@@ -32,6 +33,12 @@ public class student {
 	private boolean isAttendentPsychometricTestBefore;
 	private Date examStartTime;
 	private Date examEndTime;
+	public Long getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
 	public Long getCientId() {
 		return cientId;
 	}
@@ -206,15 +213,15 @@ public class student {
 	public void setExamEndTime(Date examEndTime) {
 		this.examEndTime = examEndTime;
 	}
-	
-	public student(Long cientId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
-			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
-			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime, Long emrno,
-			String orgName, String institutionName, Long aadharNumber, String panNo, String state, Long pinCode,
-			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Date examStartTime,
-			Date examEndTime) {
+	public StudentDetails(Long studentId, Long cientId, String studentFirstname, String studentLastname,
+			String studentEnrollmentNo, Long studentMobileNumber, String studentFatherName, String studentaddress,
+			String studentEmail, String studentBranch, String studentClientId, String studentSetAssign,
+			String studentStatus, Long studentMarks, String studentGender, String studentState, Date studentDob,
+			Date examTime, Long emrno, String orgName, String institutionName, Long aadharNumber, String panNo,
+			String state, Long pinCode, String highestQual, Long yearOfPassing,
+			boolean isAttendentPsychometricTestBefore, Date examStartTime, Date examEndTime) {
 		super();
+		this.studentId = studentId;
 		this.cientId = cientId;
 		this.studentFirstname = studentFirstname;
 		this.studentLastname = studentLastname;
@@ -246,23 +253,22 @@ public class student {
 		this.examEndTime = examEndTime;
 	}
 	
-	public student(){}
-	
+	public StudentDetails() {}
 	@Override
 	public String toString() {
-		return "student [cientId=" + cientId + ", studentFirstname=" + studentFirstname + ", studentLastname="
-				+ studentLastname + ", studentEnrollmentNo=" + studentEnrollmentNo + ", studentMobileNumber="
-				+ studentMobileNumber + ", studentFatherName=" + studentFatherName + ", studentaddress="
-				+ studentaddress + ", studentEmail=" + studentEmail + ", studentBranch=" + studentBranch
-				+ ", studentClientId=" + studentClientId + ", studentSetAssign=" + studentSetAssign + ", studentStatus="
-				+ studentStatus + ", studentMarks=" + studentMarks + ", studentGender=" + studentGender
-				+ ", studentState=" + studentState + ", studentDob=" + studentDob + ", examTime=" + examTime
-				+ ", emrno=" + emrno + ", orgName=" + orgName + ", institutionName=" + institutionName
-				+ ", aadharNumber=" + aadharNumber + ", panNo=" + panNo + ", state=" + state + ", pinCode=" + pinCode
-				+ ", highestQual=" + highestQual + ", yearOfPassing=" + yearOfPassing
+		return "StudentDetails [studentId=" + studentId + ", cientId=" + cientId + ", studentFirstname="
+				+ studentFirstname + ", studentLastname=" + studentLastname + ", studentEnrollmentNo="
+				+ studentEnrollmentNo + ", studentMobileNumber=" + studentMobileNumber + ", studentFatherName="
+				+ studentFatherName + ", studentaddress=" + studentaddress + ", studentEmail=" + studentEmail
+				+ ", studentBranch=" + studentBranch + ", studentClientId=" + studentClientId + ", studentSetAssign="
+				+ studentSetAssign + ", studentStatus=" + studentStatus + ", studentMarks=" + studentMarks
+				+ ", studentGender=" + studentGender + ", studentState=" + studentState + ", studentDob=" + studentDob
+				+ ", examTime=" + examTime + ", emrno=" + emrno + ", orgName=" + orgName + ", institutionName="
+				+ institutionName + ", aadharNumber=" + aadharNumber + ", panNo=" + panNo + ", state=" + state
+				+ ", pinCode=" + pinCode + ", highestQual=" + highestQual + ", yearOfPassing=" + yearOfPassing
 				+ ", isAttendentPsychometricTestBefore=" + isAttendentPsychometricTestBefore + ", examStartTime="
 				+ examStartTime + ", examEndTime=" + examEndTime + "]";
 	}
-
 	
+
 }

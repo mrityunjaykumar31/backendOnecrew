@@ -20,7 +20,7 @@ import com.assesemnetApp.assesemnetApp.model.StudentResponseModel;
 import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.assesemnetApp.assesemnetApp.model.StudentDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
@@ -69,7 +69,36 @@ public class StudentController {
 		}
 		
 		
+		
 		StudentEntity student = studentService.fetchByEnrollmentNameAndMobileNumber(studentEnrollmentNo, _studentMobileNumber);
+		StudentDetails studentDetils = new StudentDetails();
+		
+		studentDetils.setStudentId(student.getStudentId());
+		studentDetils.setCientId(student.getClient().getClientid());
+		studentDetils.setAadharNumber(student.getAadharNumber());
+		studentDetils.setAttendentPsychometricTestBefore(student.isAttendentPsychometricTestBefore());
+		studentDetils.setEmrno(student.getEmrno());
+		studentDetils.setExamEndTime(student.getExamEndTime());
+		studentDetils.setExamStartTime(student.getExamStartTime());
+		studentDetils.setExamTime(student.getExamTime());
+		studentDetils.setHighestQual(student.getHighestQual());
+		studentDetils.setInstitutionName(student.getInstitutionName());
+		studentDetils.setOrgName(student.getOrgName());
+		studentDetils.setPanNo(student.getPanNo());
+		studentDetils.setState(student.getState());
+		studentDetils.setStudentaddress(student.getStudentaddress());
+		studentDetils.setStudentBranch(student.getStudentBranch());
+		studentDetils.setStudentDob(student.getStudentDob());
+		studentDetils.setStudentEmail(student.getStudentEmail());
+		studentDetils.setStudentEnrollmentNo(student.getStudentEnrollmentNo());
+		studentDetils.setStudentFirstname(student.getStudentFirstname());
+		studentDetils.setStudentLastname(student.getStudentLastname());
+		studentDetils.setStudentMarks(student.getStudentMarks());
+		studentDetils.setStudentMobileNumber(student.getStudentMobileNumber());
+		studentDetils.setYearOfPassing(student.getYearOfPassing());
+		studentDetils.setStudentFatherName(student.getStudentFatherName());
+		
+		
 		StudentResponseModel res = new StudentResponseModel();
 		if(student == null) {
 			res.setMessage("User not found");
@@ -84,7 +113,7 @@ public class StudentController {
 		}else {
 			res.setMessage(null);
 			res.setSuccess(true);
-			res.setStudentDetails(student);
+			res.setStudentDetails(studentDetils);
 			try {
 				jsonInString = jacksonObjectMapper.writeValueAsString(res);
 			}catch(Exception e){}
