@@ -42,7 +42,7 @@ public class EmailService {
 			htmlTemplate = " <h1>Welcome!</h1>"+ "<p>Thank you for joining us. We're excited to have you on board.</p>" + "<p>Your login url: <a href=\"" + url + "\">" + url + "</a></p>" +" <p>User: ${name}</p> " + "<p>Password: ${pwd} </p>";
 		    htmlTemplate = htmlTemplate.replace("${url}",url);
 		  htmlTemplate = htmlTemplate.replace("${pwd}", pwd);
-		  htmlTemplate = htmlTemplate.replace("${name}", name);
+		//  htmlTemplate = htmlTemplate.replace("${name}", name);
 		    message.setContent(htmlTemplate, "text/html; charset=utf-8");
 	//	}// catch (IOException e) {
 			// TODO Auto-generated catch block

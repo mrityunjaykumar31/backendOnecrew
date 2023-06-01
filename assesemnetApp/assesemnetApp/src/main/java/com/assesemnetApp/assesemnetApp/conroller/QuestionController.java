@@ -1,7 +1,9 @@
 package com.assesemnetApp.assesemnetApp.conroller;
 
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assesemnetApp.assesemnetApp.entity.QuestionEntity;
 import com.assesemnetApp.assesemnetApp.model.Question;
+import com.assesemnetApp.assesemnetApp.model.QuestionRequestModel;
+import com.assesemnetApp.assesemnetApp.model.QuestionResponseModel;
+import com.assesemnetApp.assesemnetApp.model.QuestionDetails;
 import com.assesemnetApp.assesemnetApp.services.QuestionService;
+import com.assesemnetApp.assesemnetApp.services.UtilsService;
 
 
 
@@ -24,6 +30,8 @@ public class QuestionController {
 
 	@Autowired 
 	QuestionService QuestionService;
+	@Autowired
+	UtilsService utilsService;
 	
 	
 	@PostMapping("/Question")
@@ -35,19 +43,63 @@ public class QuestionController {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/questions")
-public ResponseEntity<List<Question>> getQuestion(@RequestParam(required=false, name = "questionStream") String questionStream, @RequestParam(required=false, name ="clientId") Long clientId) {
+public ResponseEntity<QuestionResponseModel> getQuestion(@RequestParam(required=false, name = "questionStream") String questionStream,
+		@RequestParam(required=false, name ="clientId")Long clientId, @RequestParam int totalQuestion ) {
 		
 		//return QuestionService.saveQuestion(Question);
 		
 		System.out.println(questionStream + "from controller" + clientId);
 		
-		List<Question> qe = QuestionService.findByQuestionStreamAndclient(questionStream, clientId);
+		List<Question> qe = QuestionService.findByQuestionStreamAndclientId(questionStream, clientId);
 	
 		
 		if(qe == null) {
 			 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}else {
-			return ResponseEntity.status(HttpStatus.OK).body(qe);
+			System.out.println(questionStream + "from controller" + qe);
+		Object[] objectArray = qe.toArray();
+			Object[] qestion = this.utilsService.getRandomObjects(objectArray, totalQuestion);
+//			
+//
+//	        // Ensure that the elements in the Object[] array are of type Question
+	        Question[] questionArray = Arrays.copyOf(qestion, qestion.length, Question[].class);
+//
+//	        // Convert the Question[] array to a List<Question>
+			List<Question> questionList = Arrays.asList(questionArray);
+			
+			QuestionResponseModel res = new QuestionResponseModel();
+			
+			if(questionList.size() > 0) {
+				
+				res.setIsSuccess(true);
+				res.setMessage(null);
+				res.setSubject(questionStream);
+				
+				QuestionDetails questionDetails = new QuestionDetails();
+				 List<QuestionDetails> qd = new ArrayList<>();;
+				
+				for (Question ques:  questionList) {
+					
+					questionDetails.setClientId(ques.getClient().getClientid());
+					
+					questionDetails.setQuestionId(ques.getQuestionId());
+					questionDetails.setQuestionName(ques.getQuestionName());
+					questionDetails.setQuestionOptions(ques.getQuestionOptions());
+					questionDetails.setQuestionStream(ques.getQuestionStream());
+					
+					qd.add(questionDetails);
+				}
+				res.setQuestion(qd);
+				return ResponseEntity.status(HttpStatus.OK).body(res);
+				
+			}else {
+				res.setIsSuccess(false);
+				res.setMessage("Not Found");
+				res.setQuestion(null);
+				return ResponseEntity.status(HttpStatus.OK).body(res);
+			}
+			
+		
 		}
 		
 	} 
@@ -55,7 +107,7 @@ public ResponseEntity<List<Question>> getQuestion(@RequestParam(required=false, 
 
 
 	@PostMapping("/questions")
-	public List<Question> savestudents(@RequestBody List<Question> Question) {
+	public String savestudents(@RequestBody List<QuestionRequestModel> Question) {
 		
 		return QuestionService.saveQuestions(Question);
 		

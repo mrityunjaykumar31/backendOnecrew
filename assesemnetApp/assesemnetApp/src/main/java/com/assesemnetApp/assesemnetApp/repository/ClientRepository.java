@@ -10,4 +10,6 @@ import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
 public interface ClientRepository extends JpaRepository<ClientEntity, Long>{
      
 	public ClientEntity findByClientnameAndClientpassword(String clientname, String clientpassword);
+	
+	public  ClientEntity findByClientid(Long id);
 }

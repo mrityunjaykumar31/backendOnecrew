@@ -3,7 +3,7 @@ package com.assesemnetApp.assesemnetApp.model;
 import java.sql.Date;
 
 public class student {
-	private Long cientId;
+	private Long clientId;
 	private String studentFirstname;
 	private String studentLastname;
 	private String studentEnrollmentNo;
@@ -32,11 +32,11 @@ public class student {
 	private boolean isAttendentPsychometricTestBefore;
 	private Date examStartTime;
 	private Date examEndTime;
-	public Long getCientId() {
-		return cientId;
+	public Long getClientId() {
+		return clientId;
 	}
-	public void setCientId(Long cientId) {
-		this.cientId = cientId;
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
 	public String getStudentFirstname() {
 		return studentFirstname;
@@ -207,7 +207,7 @@ public class student {
 		this.examEndTime = examEndTime;
 	}
 	
-	public student(Long cientId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
+	public student(Long clientId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
 			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime, Long emrno,
@@ -215,7 +215,7 @@ public class student {
 			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Date examStartTime,
 			Date examEndTime) {
 		super();
-		this.cientId = cientId;
+		this.clientId = clientId;
 		this.studentFirstname = studentFirstname;
 		this.studentLastname = studentLastname;
 		this.studentEnrollmentNo = studentEnrollmentNo;
@@ -250,7 +250,7 @@ public class student {
 	
 	@Override
 	public String toString() {
-		return "student [cientId=" + cientId + ", studentFirstname=" + studentFirstname + ", studentLastname="
+		return "student [clientId=" + clientId + ", studentFirstname=" + studentFirstname + ", studentLastname="
 				+ studentLastname + ", studentEnrollmentNo=" + studentEnrollmentNo + ", studentMobileNumber="
 				+ studentMobileNumber + ", studentFatherName=" + studentFatherName + ", studentaddress="
 				+ studentaddress + ", studentEmail=" + studentEmail + ", studentBranch=" + studentBranch

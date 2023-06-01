@@ -82,15 +82,15 @@ public class ClientEntity {
 		this.student = student;
 	}
 	
-	public ClientEntity() {};
-	
+	public ClientEntity() {}
 	@Override
 	public String toString() {
 		return "ClientEntity [clientid=" + clientid + ", clientname=" + clientname + ", clientpassword="
 				+ clientpassword + ", examDuration=" + examDuration + ", totalQuestionTobeShown="
-				+ totalQuestionTobeShown + ", isBlocked=" + isBlocked + ", question=" + question + ", student="
-				+ student + "]";
-	}
+				+ totalQuestionTobeShown + ", isBlocked=" + isBlocked + "]";
+	};
+	
+
 	
 	
 	

@@ -359,7 +359,7 @@ public class StudentEntity {
 				+ ", aadharNumber=" + aadharNumber + ", panNo=" + panNo + ", state=" + state + ", pinCode=" + pinCode
 				+ ", highestQual=" + highestQual + ", yearOfPassing=" + yearOfPassing
 				+ ", isAttendentPsychometricTestBefore=" + isAttendentPsychometricTestBefore + ", examStartTime="
-				+ examStartTime + ", examEndTime=" + examEndTime + ", client=" + client + ", pwd=" + pwd + "]";
+				+ examStartTime + ", examEndTime=" + examEndTime + ", pwd=" + pwd + "]";
 	}
 
 	

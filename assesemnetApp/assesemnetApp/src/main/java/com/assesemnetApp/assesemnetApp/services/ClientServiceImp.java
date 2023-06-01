@@ -22,4 +22,8 @@ public class ClientServiceImp implements ClentService {
 		return clientRepo.findByClientnameAndClientpassword(clientname, clientpassword);
 	}
 
+
+
+	
+
 }

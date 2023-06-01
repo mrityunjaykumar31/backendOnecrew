@@ -22,6 +22,9 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long>{
 	public StudentEntity findByStudentEnrollmentNoAndStudentMobileNumber(String studentEnrollmentNo, Long studentMobileNumber );
 	
 	public StudentEntity findBystudentIdAndClient(Long studentId, ClientEntity client);
+
+	public StudentEntity findByPwdAndStudentMobileNumber(String pwd, Long studentMobileNumber);
+	public StudentEntity findByStudentId(Long id);
 	
 
 	

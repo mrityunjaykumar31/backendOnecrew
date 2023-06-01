@@ -77,13 +77,15 @@ public class QuestionEntity{
 	public void setQuestionOptions(String questionOptions) {
 		this.questionOptions = questionOptions;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "QuestionEntity [questionId=" + questionId + ", questionName=" + questionName + ", questionAnswer="
 				+ questionAnswer + ", questionSet=" + questionSet + ", questionStream=" + questionStream
-				+ ", questionOptions=" + questionOptions + ", client=" + client + "]";
+				+ ", questionOptions=" + questionOptions + "]";
 	}
-	
 	public QuestionEntity(Long questionId, String questionName, String questionAnswer, String questionSet,
 			String questionStream, String questionOptions, ClientEntity client) {
 		super();
@@ -97,7 +99,7 @@ public class QuestionEntity{
 	}
 
 	
-	QuestionEntity(){}
+	public QuestionEntity(){}
 }
 
 	

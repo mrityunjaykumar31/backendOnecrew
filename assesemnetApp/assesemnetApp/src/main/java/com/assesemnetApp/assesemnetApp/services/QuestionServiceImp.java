@@ -1,5 +1,6 @@
 package com.assesemnetApp.assesemnetApp.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
 import com.assesemnetApp.assesemnetApp.entity.QuestionEntity;
+import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.Option;
 import com.assesemnetApp.assesemnetApp.model.Question;
+import com.assesemnetApp.assesemnetApp.model.QuestionRequestModel;
+import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.repository.ClientRepository;
 import com.assesemnetApp.assesemnetApp.repository.QuestionRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -58,18 +62,20 @@ public class QuestionServiceImp implements QuestionService {
 	}
 
 	@Override
-	public List<Question> findByQuestionStreamAndclient(String questionStream, Long clientId) {
+	public List<Question> findByQuestionStreamAndclientId(String questionStream, Long clientId) {
 		// TODO Auto-generated method stub
 		
 		ClientEntity client = null;
 	//	List<QuestionEntity> all = QuestionRepo.findAll();
 	//	System.out.println(questionStream + "  "+clientId+ ""+all );
 		client = ClientRepo.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
-		List<QuestionEntity> qe = QuestionRepo.findByQuestionStreamAndClient(questionStream, client);
-	//	 System.out.println(qe.toString());
+		System.out.println(questionStream + "from controller" + client);
+		List<QuestionEntity> qe = QuestionRepo.findByQuestionStreamAndClient_Clientid(questionStream, clientId);
+	// System.out.println(qe.toString());
 	List<Question> q = qe.stream().map(en -> this.convertEntityToModel(en)).collect(Collectors.toList());
+		//List<Question> q = [];
 	return q;
-	//	return null;
+		//return [];
 		 
 	}
 	
@@ -89,10 +95,42 @@ public class QuestionServiceImp implements QuestionService {
 	}
 
 	@Override
-	public List<Question> saveQuestions(List<Question> question) {
+	public String saveQuestions(List<QuestionRequestModel> question) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		
+		List<QuestionEntity> qe = new ArrayList<>();
+
+		
+		for (QuestionRequestModel q : question) {
+			
+			
+			String jsonInString = null;
+			List<Option> op = null;
+			ClientEntity client = null;
+			try {
+				jsonInString = jacksonObjectMapper.writeValueAsString(q.getQuestionOptions());
+			} catch(Exception e) {
+				
+			}
+			
+			client = ClientRepo.findById(q.getClientId()).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
+			 
+			 
+			QuestionEntity _Question =  new QuestionEntity();
+		
+			_Question.setQuestionName(q.getQuestionName());
+			_Question.setQuestionAnswer(q.getQuestionAnswer());
+			_Question.setQuestionSet(q.getQuestionSet());
+			_Question.setQuestionStream(q.getQuestionStream());
+			_Question.setQuestionOptions(jsonInString);
+			_Question.setClient(client);
+			
+			qe.add(_Question);
+		}
+		QuestionRepo.saveAll(qe);
+		
+		return "Question Saved";
+	};
 
 	
 
