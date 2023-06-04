@@ -1,6 +1,8 @@
 package com.assesemnetApp.assesemnetApp.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class StudentDetails {
 	private Long studentId;
@@ -31,8 +33,8 @@ public class StudentDetails {
 	private String highestQual;
 	private Long yearOfPassing;
 	private boolean isAttendentPsychometricTestBefore;
-	private Date examStartTime;
-	private Date examEndTime;
+	private Timestamp examStartTime;
+	private Timestamp examEndTime;
 	public Long getStudentId() {
 		return studentId;
 	}
@@ -201,16 +203,16 @@ public class StudentDetails {
 	public void setAttendentPsychometricTestBefore(boolean isAttendentPsychometricTestBefore) {
 		this.isAttendentPsychometricTestBefore = isAttendentPsychometricTestBefore;
 	}
-	public Date getExamStartTime() {
+	public Timestamp getExamStartTime() {
 		return examStartTime;
 	}
-	public void setExamStartTime(Date examStartTime) {
+	public void setExamStartTime(Timestamp examStartTime) {
 		this.examStartTime = examStartTime;
 	}
-	public Date getExamEndTime() {
+	public Timestamp getExamEndTime() {
 		return examEndTime;
 	}
-	public void setExamEndTime(Date examEndTime) {
+	public void setExamEndTime(Timestamp examEndTime) {
 		this.examEndTime = examEndTime;
 	}
 	public StudentDetails(Long studentId, Long cientId, String studentFirstname, String studentLastname,
@@ -219,7 +221,7 @@ public class StudentDetails {
 			String studentStatus, Long studentMarks, String studentGender, String studentState, Date studentDob,
 			Date examTime, Long emrno, String orgName, String institutionName, Long aadharNumber, String panNo,
 			String state, Long pinCode, String highestQual, Long yearOfPassing,
-			boolean isAttendentPsychometricTestBefore, Date examStartTime, Date examEndTime) {
+			boolean isAttendentPsychometricTestBefore, Timestamp examStartTime, Timestamp examEndTime) {
 		super();
 		this.studentId = studentId;
 		this.cientId = cientId;

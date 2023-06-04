@@ -1,6 +1,8 @@
 package com.assesemnetApp.assesemnetApp.entity;
 
+import java.sql.Timestamp; 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -45,8 +47,8 @@ public class StudentEntity {
 	private String highestQual;
 	private Long yearOfPassing;
 	private boolean isAttendentPsychometricTestBefore;
-	private Date examStartTime;
-	private Date examEndTime;
+	private Timestamp examStartTime;
+	private Timestamp examEndTime;
 	private String pwd;
 	
 	@ManyToOne
@@ -269,20 +271,20 @@ public class StudentEntity {
 		this.isAttendentPsychometricTestBefore = isAttendentPsychometricTestBefore;
 	}
 
-	public Date getExamStartTime() {
+	public Timestamp getExamStartTime() {
 		return examStartTime;
 	}
 
-	public void setExamStartTime(Date examStartTime) {
+	public void setExamStartTime(Timestamp examStartTime) {
 		this.examStartTime = examStartTime;
 	}
 
-	public Date getExamEndTime() {
+	public Timestamp getExamEndTime() {
 		return examEndTime;
 	}
 
-	public void setExamEndTime(Date examEndTime) {
-		this.examEndTime = examEndTime;
+	public void setExamEndTime(java.sql.Timestamp timestamp) {
+		this.examEndTime = timestamp;
 	}
 
 	public ClientEntity getClient() {
@@ -308,8 +310,8 @@ public class StudentEntity {
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
 			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime, Long emrno,
 			String orgName, String institutionName, Long aadharNumber, String panNo, String state, Long pinCode,
-			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Date examStartTime,
-			Date examEndTime, ClientEntity client, String pwd) {
+			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Timestamp examStartTime,
+			Timestamp examEndTime, ClientEntity client, String pwd) {
 		super();
 		this.studentId = studentId;
 		this.studentFirstname = studentFirstname;

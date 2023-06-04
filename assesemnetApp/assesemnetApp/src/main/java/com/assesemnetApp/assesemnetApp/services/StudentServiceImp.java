@@ -1,4 +1,7 @@
 package com.assesemnetApp.assesemnetApp.services;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +33,8 @@ public class StudentServiceImp implements StudentService {
 	private EmailService emailService;
 	@Autowired
 	EncryptionService encryptionService;
+	@Autowired
+	UtilsService utilsService;
 	@Override
 	public StudentEntity savestudent(StudentEntity student, Long clientId) {
 		// TODO Auto-generated method stub
@@ -74,6 +79,19 @@ public class StudentServiceImp implements StudentService {
 			stu.setStudentEmail(st.getStudentEmail());
 			stu.setStudentEnrollmentNo(st.getStudentEnrollmentNo());
 			stu.setStudentMobileNumber(st.getStudentMobileNumber());
+		
+				try {
+				//	LocalDate d = this.utilsService.parseSqlDate(st.getExamEndTime());
+					// System.out.printf("local", );
+					stu.setExamEndTime(this.utilsService.parseSqlDate(st.getExamEndTime()));
+					stu.setExamStartTime(this.utilsService.parseSqlDate(st.getExamStartTime()));
+				} catch (DateTimeParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+			
 			stu.setClient(client);
 			stu.setPwd(pwd);
 			

@@ -19,6 +19,7 @@ import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.StudentResponseModel;
 import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
+import com.assesemnetApp.assesemnetApp.services.UtilsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.assesemnetApp.assesemnetApp.model.StudentDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,6 +33,8 @@ public class StudentController {
 	StudentService studentService;
 	@Autowired
 	 private ObjectMapper jacksonObjectMapper;
+	@Autowired
+	private UtilsService utilsService;
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/students")
@@ -95,7 +98,7 @@ public class StudentController {
 			studentDetils.setAttendentPsychometricTestBefore(student.isAttendentPsychometricTestBefore());
 			studentDetils.setEmrno(student.getEmrno());
 			studentDetils.setExamEndTime(student.getExamEndTime());
-			studentDetils.setExamStartTime(student.getExamStartTime());
+			studentDetils.setExamStartTime((student.getExamStartTime()));
 			studentDetils.setExamTime(student.getExamTime());
 			studentDetils.setHighestQual(student.getHighestQual());
 			studentDetils.setInstitutionName(student.getInstitutionName());

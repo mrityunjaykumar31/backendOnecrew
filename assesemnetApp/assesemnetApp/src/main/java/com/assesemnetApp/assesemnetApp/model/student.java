@@ -19,7 +19,7 @@ public class student {
 	private String studentGender;
 	private String studentState;
 	private Date studentDob;
-	private Date examTime;
+	private String examTime;
 	private Long emrno;
 	private String orgName;
 	private String institutionName; 
@@ -30,8 +30,8 @@ public class student {
 	private String highestQual;
 	private Long yearOfPassing;
 	private boolean isAttendentPsychometricTestBefore;
-	private Date examStartTime;
-	private Date examEndTime;
+	private String examStartTime;
+	private String examEndTime;
 	public Long getClientId() {
 		return clientId;
 	}
@@ -128,10 +128,10 @@ public class student {
 	public void setStudentDob(Date studentDob) {
 		this.studentDob = studentDob;
 	}
-	public Date getExamTime() {
+	public String getExamTime() {
 		return examTime;
 	}
-	public void setExamTime(Date examTime) {
+	public void setExamTime(String examTime) {
 		this.examTime = examTime;
 	}
 	public Long getEmrno() {
@@ -194,26 +194,26 @@ public class student {
 	public void setAttendentPsychometricTestBefore(boolean isAttendentPsychometricTestBefore) {
 		this.isAttendentPsychometricTestBefore = isAttendentPsychometricTestBefore;
 	}
-	public Date getExamStartTime() {
+	public String getExamStartTime() {
 		return examStartTime;
 	}
-	public void setExamStartTime(Date examStartTime) {
+	public void setExamStartTime(String examStartTime) {
 		this.examStartTime = examStartTime;
 	}
-	public Date getExamEndTime() {
+	public String getExamEndTime() {
 		return examEndTime;
 	}
-	public void setExamEndTime(Date examEndTime) {
+	public void setExamEndTime(String examEndTime) {
 		this.examEndTime = examEndTime;
 	}
 	
 	public student(Long clientId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
-			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime, Long emrno,
+			Long studentMarks, String studentGender, String studentState, Date studentDob, String examTime, Long emrno,
 			String orgName, String institutionName, Long aadharNumber, String panNo, String state, Long pinCode,
-			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Date examStartTime,
-			Date examEndTime) {
+			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, String examStartTime,
+			String examEndTime) {
 		super();
 		this.clientId = clientId;
 		this.studentFirstname = studentFirstname;

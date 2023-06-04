@@ -62,18 +62,20 @@ public class QuestionServiceImp implements QuestionService {
 	}
 
 	@Override
-	public List<Question> findByQuestionStreamAndclientId(String questionStream, Long clientId) {
+	public List<Question> findByQuestionStreamAndclientId(String questionStream, Long clientId, int limit ) {
 		// TODO Auto-generated method stub
 		
 		ClientEntity client = null;
 	//	List<QuestionEntity> all = QuestionRepo.findAll();
 	//	System.out.println(questionStream + "  "+clientId+ ""+all );
 		client = ClientRepo.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
-		System.out.println(questionStream + "from controller" + client);
-		List<QuestionEntity> qe = QuestionRepo.findByQuestionStreamAndClient_Clientid(questionStream, clientId);
-	// System.out.println(qe.toString());
+		//System.out.println(questionStream + "from controller" + client);
+		List<QuestionEntity> qe = QuestionRepo.findRandomRecordsByQuestionStreamAndClient_Clientid(questionStream, clientId, limit);
+	  
 	List<Question> q = qe.stream().map(en -> this.convertEntityToModel(en)).collect(Collectors.toList());
 		//List<Question> q = [];
+	
+	//System.out.println("", q);
 	return q;
 		//return [];
 		 

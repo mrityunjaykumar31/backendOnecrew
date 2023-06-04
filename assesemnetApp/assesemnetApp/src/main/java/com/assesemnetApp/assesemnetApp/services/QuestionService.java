@@ -10,7 +10,7 @@ public interface QuestionService {
 	
 	Question saveQuestion (Question Question, Long clientId);
 	
-	List<Question> findByQuestionStreamAndclientId(String questionStream, Long clientId);
+	List<Question> findByQuestionStreamAndclientId(String questionStream, Long clientId, int limit);
 
 	String saveQuestions(List<QuestionRequestModel> question);
 

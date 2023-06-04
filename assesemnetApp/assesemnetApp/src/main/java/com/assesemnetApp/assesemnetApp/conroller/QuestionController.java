@@ -48,48 +48,51 @@ public ResponseEntity<QuestionResponseModel> getQuestion(@RequestParam(required=
 		
 		//return QuestionService.saveQuestion(Question);
 		
-		System.out.println(questionStream + "from controller" + clientId);
 		
-		List<Question> qe = QuestionService.findByQuestionStreamAndclientId(questionStream, clientId);
+		
+		List<Question> qe = QuestionService.findByQuestionStreamAndclientId(questionStream, clientId, totalQuestion);
 	
 		
 		if(qe == null) {
 			 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}else {
-			System.out.println(questionStream + "from controller" + qe);
-		Object[] objectArray = qe.toArray();
-			Object[] qestion = this.utilsService.getRandomObjects(objectArray, totalQuestion);
-//			
-//
-//	        // Ensure that the elements in the Object[] array are of type Question
-	        Question[] questionArray = Arrays.copyOf(qestion, qestion.length, Question[].class);
-//
-//	        // Convert the Question[] array to a List<Question>
-			List<Question> questionList = Arrays.asList(questionArray);
+			//System.out.println(questionStream + "from controller" + qe);
+//		Object[] objectArray = qe.toArray();
+//			Object[] qestion = this.utilsService.getRandomObjects(objectArray, totalQuestion);
+////			
+////
+////	        // Ensure that the elements in the Object[] array are of type Question
+//	        Question[] questionArray = Arrays.copyOf(qestion, qestion.length, Question[].class);
+////
+////	        // Convert the Question[] array to a List<Question>
+//			List<Question> questionList = Arrays.asList(questionArray);
 			
 			QuestionResponseModel res = new QuestionResponseModel();
 			
-			if(questionList.size() > 0) {
+			if(qe.size() > 0) {
 				
 				res.setIsSuccess(true);
 				res.setMessage(null);
 				res.setSubject(questionStream);
 				
-				QuestionDetails questionDetails = new QuestionDetails();
+				
 				 List<QuestionDetails> qd = new ArrayList<>();;
 				
-				for (Question ques:  questionList) {
-					
+				for (Question ques:  qe) {
+					//System.out.println(ques + "from controller");
+					QuestionDetails questionDetails = new QuestionDetails();
 					questionDetails.setClientId(ques.getClient().getClientid());
 					
 					questionDetails.setQuestionId(ques.getQuestionId());
 					questionDetails.setQuestionName(ques.getQuestionName());
 					questionDetails.setQuestionOptions(ques.getQuestionOptions());
 					questionDetails.setQuestionStream(ques.getQuestionStream());
-					
+					// System.out.println(questionDetails + "from controller");
 					qd.add(questionDetails);
+					
 				}
 				res.setQuestion(qd);
+			
 				return ResponseEntity.status(HttpStatus.OK).body(res);
 				
 			}else {
