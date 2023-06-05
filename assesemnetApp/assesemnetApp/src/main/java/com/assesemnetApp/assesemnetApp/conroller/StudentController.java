@@ -22,6 +22,7 @@ import com.assesemnetApp.assesemnetApp.services.StudentService;
 import com.assesemnetApp.assesemnetApp.services.UtilsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.assesemnetApp.assesemnetApp.model.StudentDetails;
+import com.assesemnetApp.assesemnetApp.model.StudentLogingRequestModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
@@ -48,8 +49,8 @@ public class StudentController {
 	
 	//@CrossOrigin(origins = "http://localhost:4200")
 	@CrossOrigin(origins = "*")
-	@GetMapping("/student-loging")
-	public ResponseEntity<String> fetchByPwdAndMobileNumber(@RequestParam("pwd") String pwd, @RequestParam("studentMobileNumber") Long studentMobileNumber ){
+	@PostMapping("/student-loging")
+	public ResponseEntity<String> fetchByPwdAndMobileNumber(@RequestBody StudentLogingRequestModel payload){
 		
 		String jsonInString = null;
 			
@@ -57,7 +58,7 @@ public class StudentController {
 		Long _studentMobileNumber  = null;
 		try {
 			//_studentMobileNumber =  (long) Integer.parseInt(studentMobileNumber);
-			_studentMobileNumber = studentMobileNumber;
+			_studentMobileNumber = payload.getStudentMobileNumber();
 			}catch(NumberFormatException nf) {
 				StudentResponseModel res = new StudentResponseModel();
 				
@@ -74,7 +75,7 @@ public class StudentController {
 		
 		
 		
-		StudentEntity student = studentService.fetchByPwdAndMobileNumber(pwd, _studentMobileNumber);
+		StudentEntity student = studentService.fetchByPwdAndMobileNumber(payload.getPwd(), _studentMobileNumber);
 		StudentDetails studentDetils = new StudentDetails();
 		
 		
