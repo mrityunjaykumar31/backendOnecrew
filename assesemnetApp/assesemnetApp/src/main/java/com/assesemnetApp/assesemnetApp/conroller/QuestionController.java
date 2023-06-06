@@ -33,7 +33,7 @@ public class QuestionController {
 	@Autowired
 	UtilsService utilsService;
 	
-	
+	@CrossOrigin(origins = "*")
 	@PostMapping("/Question")
 	public Question savestudent(@RequestParam(required=true, name = "clientId") Long clientId,@RequestBody Question Question) {
 		
@@ -41,7 +41,7 @@ public class QuestionController {
 		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@GetMapping("/questions")
 public ResponseEntity<QuestionResponseModel> getQuestion(@RequestParam(required=false, name = "questionStream") String questionStream,
 		@RequestParam(required=false, name ="clientId")Long clientId, @RequestParam int totalQuestion ) {
@@ -108,7 +108,7 @@ public ResponseEntity<QuestionResponseModel> getQuestion(@RequestParam(required=
 	} 
 	
 
-
+	@CrossOrigin(origins = "*")
 	@PostMapping("/questions")
 	public String savestudents(@RequestBody List<QuestionRequestModel> Question) {
 		

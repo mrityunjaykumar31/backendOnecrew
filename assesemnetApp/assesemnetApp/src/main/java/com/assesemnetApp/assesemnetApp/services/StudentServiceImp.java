@@ -79,6 +79,7 @@ public class StudentServiceImp implements StudentService {
 			stu.setStudentEmail(st.getStudentEmail());
 			stu.setStudentEnrollmentNo(st.getStudentEnrollmentNo());
 			stu.setStudentMobileNumber(st.getStudentMobileNumber());
+			stu.setStudentBranch(st.getStudentBranch());
 		
 				try {
 				//	LocalDate d = this.utilsService.parseSqlDate(st.getExamEndTime());
@@ -96,8 +97,8 @@ public class StudentServiceImp implements StudentService {
 			stu.setPwd(pwd);
 			
 			try {
-				
-				String baseUrl = "http://52.207.59.58/login/"+ this.encryptionService.encrypt(st.getStudentMobileNumber().toString());
+				String baseUrl = "http://52.207.59.58/login";
+			//	String baseUrl = "http://52.207.59.58/login/"+ this.encryptionService.encrypt(st.getStudentMobileNumber().toString());
 				String title = "Exam Details";
 				String mail= st.getStudentEmail();
 				this.emailService.sendHtmlEmail("career4@prernagroup.org", title, baseUrl, mail, pwd, st.getStudentMobileNumber().toString());
