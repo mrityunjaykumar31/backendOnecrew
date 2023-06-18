@@ -36,7 +36,7 @@ public class AnswerServiceImp implements AnswerService  {
 		String jsonInString = null;
 		client = ClientRepo.findById(answerResponseModel.getClientid()).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
 		//student = StudentRepo.findBystudentIdAndClient(studentId, client).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
-		//student = StudentRepo.findBystudentIdAndClient(answerResponseModel.getStudentId(), client);
+		student = StudentRepo.findBystudentIdAndClient(answerResponseModel.getStudentId(), client);
 		try {
 			jsonInString = jacksonObjectMapper.writeValueAsString(answerResponseModel.getAnswer());
 		} catch(Exception e) {
