@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dynamic HTML to PDF Example</title>
+    
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+		.headerfooter{
+			border-bottom: 1px solid cyan;
+		}
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		
+		ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul{
+	/*margin-left:400px;*/
+	/*width: 400px;*/
+}	
+ul li {
+  width: 5px;
+  height: 5px;
+  margin-right: 5px;
+}
+
+	</style>
+</head>
+<body>
+	
+	
+		<div style="text-align: left; float: left"> 
+			<p th:text="${title}">Default Title</p>
+		</div>
+		<div style="float: right;">
+			 <p th:text="${content}">Default Content</p>
+			
+		</div>
+	 <div class="headerfooter" style=" margin-top:40px">	
+    </div>
+    <div>
+	<img src="https://onecrew.s3.amazonaws.com/logo_user.png" 
+     th:src="@{https://onecrew.s3.amazonaws.com/logo_user.png}" th:alt-title="#{logo}" />
+	</div>
+		<p style="text-align: center;">Employability Skills Test(EST)-  [[${student.studentBranch}]]</p>
+    <table style="width: 100%;margin-top: 30px;">
+		<tr>
+			<td style="border-left: 2px solid cyan; padding-left: 2px;">Name: [[${student.studentFirstname}]] [[${student.studentLastname}]]</td>
+			<td></td>
+			<td>Branch: [[${student.studentBranch}]]</td>
+			
+		</tr>
+		<tr>
+			<td>D.O.B: [[${student.studentDob}]]</td>
+			<td></td>
+			<td>Address: [[${student.studentaddress}]]</td>
+			
+		</tr>
+		<tr>
+			<td>Eduction: [[${student.highestQual}]]</td>
+		</tr>
+	</table>
+	
+	    <table style="width: 100%;margin-top: 30px;">
+		<tr>
+			<td style="border-left: 2px solid cyan; padding-left: 2px;">Date: [[${examTime}]]</td>
+			<td></td>
+			<td>Finish State: </td>
+			
+		</tr>
+		<tr>
+			<td>Start time: </td>
+			<td></td>
+			<td>End time: </td>
+			
+		</tr>
+		<tr>
+			<td>Response style: </td>
+		</tr>
+	</table>
+    
+    <div class="headerfooter" style="height: 700px; margin-bottom: 10px;"></div>
+    <div th:include="footer :: copy"></div>
+    <div style="text-align: left; float: left"> 
+			<p th:text="${title}">Default Title</p>
+		</div>
+		<div style="float: right;">
+			 <p th:text="${content}">Default Content</p>
+			
+		</div>
+	 <div class="headerfooter" style=" margin-top:40px"></div>
+	 
+	 <div style="margin-top: 50px;"><h2>OverAll Report Summery:</h2></div>
+	 <table style="width: 100%">
+		 <tr>
+			 <td>
+				 <h4 style="text-align: center;">Mark Scored: </h4>
+				 
+			 </td>
+			 <td>
+				 <h4 style="text-align: center;">Summery of attampts: </h4>
+				<div class="chart-container">
+						
+     
+        	<div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+        			</div>
+        			
+        			
+        			<img src="${dataURL}"/>
+        		<ul style="align-items: center;">
+					<li style="float: left; margin-top:10pdataURLx ;  background-color: red;"></li> <span>Correct:</span>
+					<div style="clear:both; margin-top:5px"></div>
+					<li style="float: left; margin-top:5px; background-color: green;"></li> <span>Icorrect:</span>
+					<div style="clear:both; margin-top:5px;"></div>
+					<li style="float: left; margin-top:5px ; background-color: gray;"> </li> <span>Not attempt:</span>
+				</ul>
+        			
+        			
+        			
+      		
+			 </td>
+		 </tr>
+	 </table>
+	 
+	  <div class="headerfooter" style="height: 800px; margin-bottom: 10px;"></div>
+    <div th:include="footer :: copy"></div>
+    
+    
+    <script th:inline="javascript">
+		/**var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+ var ctx = document.getElementById('myChart');
+new Chart("ctx", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "World Wide Wine Production 2018"
+    }
+  }
+});
+
+const canvas = document.getElementById("myChart");
+const dataURL = canvas.toDataURL();
+console.log("xxx",dataURL);
+const x = 2+2;**/
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+  ['Contry', 'Mhl'],
+  ['Italy',54.8],
+  ['France',48.6],
+  ['Spain',44.4],
+  ['USA',23.9],
+  ['Argentina',14.5]
+]);
+
+var options = {
+  title:'World Wide Wine Production'
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+  chart.draw(data, options);
+}
+
+const dataURL = chart.toDataURL();
+	</script>
+</body>
+</html>

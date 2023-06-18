@@ -9,6 +9,7 @@ import com.assesemnetApp.assesemnetApp.entity.AnswerEntity;
 import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.Answer;
+import com.assesemnetApp.assesemnetApp.model.AnswerResponseModel;
 import com.assesemnetApp.assesemnetApp.repository.AnswerRepository;
 import com.assesemnetApp.assesemnetApp.repository.ClientRepository;
 import com.assesemnetApp.assesemnetApp.repository.StudentRepository;
@@ -28,23 +29,26 @@ public class AnswerServiceImp implements AnswerService  {
 	 private ObjectMapper jacksonObjectMapper;
 
 	@Override
-	public AnswerEntity saveAnswer(List<Answer> answer, Long clientId, Long studentId) {
+	public AnswerEntity saveAnswer(AnswerResponseModel answerResponseModel) {
 		// TODO Auto-generated method stub
 		ClientEntity client = null;
 		StudentEntity student = null;
 		String jsonInString = null;
-		client = ClientRepo.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
+		client = ClientRepo.findById(answerResponseModel.getClientid()).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
 		//student = StudentRepo.findBystudentIdAndClient(studentId, client).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID"));
-		student = StudentRepo.findBystudentIdAndClient(studentId, client);
+		//student = StudentRepo.findBystudentIdAndClient(answerResponseModel.getStudentId(), client);
 		try {
-			jsonInString = jacksonObjectMapper.writeValueAsString(answer);
+			jsonInString = jacksonObjectMapper.writeValueAsString(answerResponseModel.getAnswer());
 		} catch(Exception e) {
 			
 		}
 		AnswerEntity ans = new AnswerEntity();
 		ans.setAnswer(jsonInString);
 		ans.setStudent(student);
-		ans.setTimeStamp(null);
+		ans.setEndTime(answerResponseModel.getEndTime());
+		ans.setStartTime(answerResponseModel.getStartTime());
+		//ans.setTimeStamp(null);
+		ans.setClient(client);
 	//	ans.
 		return AnsRepo.save(ans);
 	}

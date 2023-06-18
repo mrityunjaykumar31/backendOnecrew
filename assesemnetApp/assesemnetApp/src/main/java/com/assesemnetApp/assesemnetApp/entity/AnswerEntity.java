@@ -1,5 +1,7 @@
 package com.assesemnetApp.assesemnetApp.entity;
 
+import java.sql.Timestamp;
+
 import com.assesemnetApp.assesemnetApp.model.Answer;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -16,19 +19,32 @@ public class AnswerEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long answerid;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="studentId")
 	private StudentEntity student;
+	@ManyToOne
+	@JoinColumn(name="clientid")
+	private ClientEntity client;
 	
 	private String answer;
-	private Long timeStamp;
+	private Timestamp startTime;
+	private Timestamp endTime;
+
 	
-	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student, String answer, Long timeStamp) {
+	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student, String answer, Timestamp startTime, Timestamp endTime) {
 		super();
 		this.answerid = answerid;
 		this.student = student;
 		this.answer = answer;
-		this.timeStamp = timeStamp;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.client = client;
+	}
+
+
+
+	public Timestamp getStartTime() {
+		return startTime;
 	}
 
 	public String getAnswer() {
@@ -39,27 +55,34 @@ public class AnswerEntity {
 		this.answer = answer;
 	}
 
-	public Long getTimeStamp() {
-		return timeStamp;
+	public Timestamp getsetStartTimes() {
+		return startTime;
 	}
 
-	public void setTimeStamp(Long timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
 	}
 
 	
-	
+
+
+
 	@Override
 	public String toString() {
-		return "AnswerEntity [answerid=" + answerid + ", student=" + student + ", answer="
-				+ answer + ", timeStamp=" + timeStamp + "]";
+		return "AnswerEntity [answerid=" + answerid + ", answer=" + answer + ", startTime="
+				+ startTime + ", endTime=" + endTime + "]";
 	}
 
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
 
 	public AnswerEntity(){}
-	public AnswerEntity(StudentEntity student2, Answer answer2) {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public Long getAnswerid() {
 		return answerid;
@@ -79,4 +102,17 @@ public class AnswerEntity {
 		this.student = student;
 	}
 
+
+
+	public ClientEntity getClient() {
+		return client;
+	}
+
+
+
+	public void setClient(ClientEntity client) {
+		this.client = client;
+	}
+
+	
 }
