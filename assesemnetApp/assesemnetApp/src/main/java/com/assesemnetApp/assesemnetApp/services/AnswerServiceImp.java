@@ -1,5 +1,7 @@
 package com.assesemnetApp.assesemnetApp.services;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class AnswerServiceImp implements AnswerService  {
 	
 	@Autowired
 	 private ObjectMapper jacksonObjectMapper;
+	@Autowired
+	private UtilsService utilsService;
 
 	@Override
 	public AnswerEntity saveAnswer(AnswerResponseModel answerResponseModel) {
@@ -45,12 +49,18 @@ public class AnswerServiceImp implements AnswerService  {
 		AnswerEntity ans = new AnswerEntity();
 		ans.setAnswer(jsonInString);
 		ans.setStudent(student);
-		ans.setEndTime(answerResponseModel.getEndTime());
-		ans.setStartTime(answerResponseModel.getStartTime());
+		ans.setEndTime(Timestamp.valueOf(answerResponseModel.getEndTime()));
+		ans.setStartTime(Timestamp.valueOf(answerResponseModel.getStartTime()));
 		//ans.setTimeStamp(null);
 		ans.setClient(client);
 	//	ans.
 		return AnsRepo.save(ans);
+	}
+
+	@Override
+	public List<AnswerEntity> findByDateAndClientId(Date date, Long clientId) {
+		// TODO Auto-generated method stub
+		return this.AnsRepo.findBystartTimeAndClient_Clientid(date, clientId);
 	}
 
 }

@@ -3,34 +3,28 @@ package com.assesemnetApp.assesemnetApp.model;
 public class Answer {
 	
 	Long questionId;
-	String ans;
-	
-	
-
+	String questionAnswer;
 	public Long getQuestionId() {
 		return questionId;
 	}
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
-	public String getAns() {
-		return ans;
+	public String getQuestionAnswer() {
+		return questionAnswer;
 	}
-	public void setAns(String ans) {
-		this.ans = ans;
+	public void setQuestionAnswer(String questionAnswer) {
+		this.questionAnswer = questionAnswer;
 	}
-	
-	public Answer(Long questionId, String ans) {
+	@Override
+	public String toString() {
+		return "Answer [questionId=" + questionId + ", questionAnswer=" + questionAnswer + "]";
+	}
+	public Answer(Long questionId, String questionAnswer) {
 		super();
 		this.questionId = questionId;
-		this.ans = ans;
+		this.questionAnswer = questionAnswer;
 	}
 	
 	Answer(){}
-	@Override
-	public String toString() {
-		return "Answer [questionId=" + questionId + ", ans=" + ans + ", getQuestionId()=" + getQuestionId()
-				+ ", getAns()=" + getAns() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ "]";
-	}
 }

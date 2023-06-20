@@ -70,7 +70,7 @@ public class AnswerEntity {
 	@Override
 	public String toString() {
 		return "AnswerEntity [answerid=" + answerid + ", answer=" + answer + ", startTime="
-				+ startTime + ", endTime=" + endTime + "]";
+				+ startTime + ", endTime=" + endTime + ", studentId=" + student.toString() + "]";
 	}
 
 	public Timestamp getEndTime() {

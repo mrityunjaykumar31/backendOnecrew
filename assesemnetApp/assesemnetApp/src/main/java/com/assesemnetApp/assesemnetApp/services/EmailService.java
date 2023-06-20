@@ -54,6 +54,34 @@ public class EmailService {
 	    mailSender.send(message);
 	}
 
+	
+	
+	public void sendReportEamil(String enc, String mailId, String id) throws MessagingException {
+		
+	    MimeMessage message = mailSender.createMimeMessage();
+
+	    message.setFrom(new InternetAddress("career4@prernagroup.org"));
+	    message.setRecipients(MimeMessage.RecipientType.TO, mailId);
+	    message.setSubject("Report Port");
+
+	    String baseUrl = "http://localhost:8082/generate-pdf?value="+enc + "&Id=" + id;
+	    String htmlTemplate;
+		//try {
+			//htmlTemplate = readFile("email-template.html");
+			// Replace placeholders in the HTML template with dynamic values
+			htmlTemplate = " <h1>Welcome!</h1>" + "<div>"+ "Download your report from: <a href=\"" + baseUrl + "\">\" + ${baseUrl} + \"</a>"
+					+ "</div>";
+			 htmlTemplate = htmlTemplate.replace("${baseUrl}", baseUrl);
+		    message.setContent(htmlTemplate, "text/html; charset=utf-8");
+	//	}// catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		//}
+
+	    
+
+	    mailSender.send(message);
+	}
 	private String readFile (String filePath) throws IOException {
         byte[] encodedBytes = Files.readAllBytes(Paths.get(filePath));
         return new String(encodedBytes);

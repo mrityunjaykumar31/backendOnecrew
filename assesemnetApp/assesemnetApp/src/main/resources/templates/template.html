@@ -103,14 +103,12 @@ ul li {
 			 </td>
 			 <td>
 				 <h4 style="text-align: center;">Summery of attampts: </h4>
-				<div class="chart-container">
+			
 						
      
-        	<div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
-        			</div>
+        	
+        		
         			
-        			
-        			<img src="${dataURL}"/>
         		<ul style="align-items: center;">
 					<li style="float: left; margin-top:10pdataURLx ;  background-color: red;"></li> <span>Correct:</span>
 					<div style="clear:both; margin-top:5px"></div>
@@ -129,62 +127,5 @@ ul li {
 	  <div class="headerfooter" style="height: 800px; margin-bottom: 10px;"></div>
     <div th:include="footer :: copy"></div>
     
-    
-    <script th:inline="javascript">
-		/**var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
- var ctx = document.getElementById('myChart');
-new Chart("ctx", {
-  type: "doughnut",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "World Wide Wine Production 2018"
-    }
-  }
-});
-
-const canvas = document.getElementById("myChart");
-const dataURL = canvas.toDataURL();
-console.log("xxx",dataURL);
-const x = 2+2;**/
-
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-var data = google.visualization.arrayToDataTable([
-  ['Contry', 'Mhl'],
-  ['Italy',54.8],
-  ['France',48.6],
-  ['Spain',44.4],
-  ['USA',23.9],
-  ['Argentina',14.5]
-]);
-
-var options = {
-  title:'World Wide Wine Production'
-};
-
-var chart = new google.visualization.PieChart(document.getElementById('myChart'));
-  chart.draw(data, options);
-}
-
-const dataURL = chart.toDataURL();
-	</script>
 </body>
 </html>
