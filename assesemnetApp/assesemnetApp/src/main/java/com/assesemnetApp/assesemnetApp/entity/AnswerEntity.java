@@ -1,6 +1,9 @@
 package com.assesemnetApp.assesemnetApp.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 
 import com.assesemnetApp.assesemnetApp.model.Answer;
 
@@ -12,8 +15,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "answerEntity")
 public class AnswerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,16 +31,18 @@ public class AnswerEntity {
 	@JoinColumn(name="clientid")
 	private ClientEntity client;
 	
-	private String answer;
+
 	private Timestamp startTime;
 	private Timestamp endTime;
 
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "answerEntity")
+	private List<GivenAnswerEntity> givenAnswerEntity;
 	
-	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student, String answer, Timestamp startTime, Timestamp endTime) {
+	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student,  Timestamp startTime, Timestamp endTime) {
 		super();
 		this.answerid = answerid;
 		this.student = student;
-		this.answer = answer;
+		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.client = client;
@@ -47,13 +54,7 @@ public class AnswerEntity {
 		return startTime;
 	}
 
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
+	
 
 	public Timestamp getsetStartTimes() {
 		return startTime;
@@ -69,7 +70,7 @@ public class AnswerEntity {
 
 	@Override
 	public String toString() {
-		return "AnswerEntity [answerid=" + answerid + ", answer=" + answer + ", startTime="
+		return "AnswerEntity [answerid=" + answerid + ",  startTime="
 				+ startTime + ", endTime=" + endTime + ", studentId=" + student.toString() + "]";
 	}
 
@@ -112,6 +113,25 @@ public class AnswerEntity {
 
 	public void setClient(ClientEntity client) {
 		this.client = client;
+	}
+
+
+
+	public void setAnswer(List<Answer> answer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public List<GivenAnswerEntity> getGivenAnswerEntity() {
+		return givenAnswerEntity;
+	}
+
+
+
+	public void setGivenAnswerEntity(List<GivenAnswerEntity> givenAnswerEntity) {
+		this.givenAnswerEntity = givenAnswerEntity;
 	}
 
 	
