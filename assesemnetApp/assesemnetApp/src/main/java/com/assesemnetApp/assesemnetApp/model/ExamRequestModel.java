@@ -8,8 +8,17 @@ public class ExamRequestModel {
 	private String examEndTime;
 	private int examDuration;
 	private int totalquestion;
+	private Long clientId;
+	
+	
 	public String getExamName() {
 		return examName;
+	}
+	public Long getClientId() {
+		return clientId;
+	}
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
 	public void setExamName(String examName) {
 		this.examName = examName;
@@ -39,18 +48,22 @@ public class ExamRequestModel {
 		this.totalquestion = totalquestion;
 	}
 	public ExamRequestModel(String examName, String examStartTime, String examEndTime, int examDuration,
-			int totalquestion) {
+			int totalquestion, Long clientId) {
 		super();
 		this.examName = examName;
 		this.examStartTime = examStartTime;
 		this.examEndTime = examEndTime;
 		this.examDuration = examDuration;
 		this.totalquestion = totalquestion;
+		this.clientId = clientId;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "ExamRequestModel [examName=" + examName + ", examStartTime=" + examStartTime + ", examEndTime="
-				+ examEndTime + ", examDuration=" + examDuration + ", totalquestion=" + totalquestion + "]";
+				+ examEndTime + ", examDuration=" + examDuration + ", totalquestion=" + totalquestion + ", clientId="
+				+ clientId + "]";
 	}
 	
 	

@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -20,6 +22,9 @@ public class ExamEntity {
 	private int examDuration;
 	private int totalquestion;
 
+	@ManyToOne
+	@JoinColumn(name="clientid")
+	private ClientEntity client;
 	
 	public Long getExamId() {
 		return examId;
@@ -82,8 +87,18 @@ public class ExamEntity {
 
 	
 
+	public ClientEntity getClient() {
+		return client;
+	}
+
+
+	public void setClient(ClientEntity client) {
+		this.client = client;
+	}
+
+
 	public ExamEntity(Long examId, String examName, Timestamp examStartTime, Timestamp examEndTime, int examDuration,
-			int totalquestion) {
+			int totalquestion,  ClientEntity client) {
 		super();
 		this.examId = examId;
 		this.examName = examName;
@@ -91,8 +106,19 @@ public class ExamEntity {
 		this.examEndTime = examEndTime;
 		this.examDuration = examDuration;
 		this.totalquestion = totalquestion;
+		this.client = client;
 	}
 
 
 	public ExamEntity() {}
+
+
+	@Override
+	public String toString() {
+		return "ExamEntity [examId=" + examId + ", examName=" + examName + ", examStartTime=" + examStartTime
+				+ ", examEndTime=" + examEndTime + ", examDuration=" + examDuration + ", totalquestion=" + totalquestion
+				+ ", client=" + client + "]";
+	}
+	
+	
 }
