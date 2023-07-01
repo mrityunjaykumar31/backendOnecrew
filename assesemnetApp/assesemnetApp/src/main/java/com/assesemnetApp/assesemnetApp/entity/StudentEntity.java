@@ -55,6 +55,10 @@ public class StudentEntity {
 	@JoinColumn(name="clientid")
 	private ClientEntity client;
 	
+	@ManyToOne
+	@JoinColumn(name="examId")
+	private ExamEntity exam;
+	
 	public Long getStudentId() {
 		return studentId;
 	}
@@ -305,13 +309,22 @@ public class StudentEntity {
 		this.pwd = pwd;
 	}
 
+	
+	public ExamEntity getExam() {
+		return exam;
+	}
+
+	public void setExam(ExamEntity exam) {
+		this.exam = exam;
+	}
+
 	public StudentEntity(Long studentId, String studentFirstname, String studentLastname, String studentEnrollmentNo,
 			Long studentMobileNumber, String studentFatherName, String studentaddress, String studentEmail,
 			String studentBranch, String studentClientId, String studentSetAssign, String studentStatus,
 			Long studentMarks, String studentGender, String studentState, Date studentDob, Date examTime, Long emrno,
 			String orgName, String institutionName, Long aadharNumber, String panNo, String state, Long pinCode,
 			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, Timestamp examStartTime,
-			Timestamp examEndTime, ClientEntity client, String pwd) {
+			Timestamp examEndTime, ClientEntity client, String pwd, ExamEntity exam) {
 		super();
 		this.studentId = studentId;
 		this.studentFirstname = studentFirstname;
@@ -344,6 +357,7 @@ public class StudentEntity {
 		this.examEndTime = examEndTime;
 		this.client = client;
 		this.pwd = pwd;
+		this.exam = exam;
 	}
 
 	public StudentEntity() {}
@@ -361,7 +375,8 @@ public class StudentEntity {
 				+ ", aadharNumber=" + aadharNumber + ", panNo=" + panNo + ", state=" + state + ", pinCode=" + pinCode
 				+ ", highestQual=" + highestQual + ", yearOfPassing=" + yearOfPassing
 				+ ", isAttendentPsychometricTestBefore=" + isAttendentPsychometricTestBefore + ", examStartTime="
-				+ examStartTime + ", examEndTime=" + examEndTime + ", pwd=" + pwd + "]";
+				+ examStartTime + ", examEndTime=" + examEndTime + ", pwd=" + pwd + ", client=" + client + ", exam="
+				+ exam + "]";
 	}
 
 	

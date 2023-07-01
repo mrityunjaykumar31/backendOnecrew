@@ -61,17 +61,21 @@ import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.GeneratereportRequestModel;
 import com.assesemnetApp.assesemnetApp.model.StudentDetails;
 import com.assesemnetApp.assesemnetApp.repository.KeyRepository;
+import com.assesemnetApp.assesemnetApp.repository.ReportRepository;
 import com.assesemnetApp.assesemnetApp.services.AnswerService;
 import com.assesemnetApp.assesemnetApp.services.EmailService;
 import com.assesemnetApp.assesemnetApp.services.EncryptionService;
 import com.assesemnetApp.assesemnetApp.services.PdfGeneratorService;
+import com.assesemnetApp.assesemnetApp.services.ReportService;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
 import com.itextpdf.text.*;
 //import com.itextpdf.text.pdf.PdfWriter;
 import com.assesemnetApp.assesemnetApp.entity.AnswerEntity;
 import com.assesemnetApp.assesemnetApp.entity.KeyEntity;
+import com.assesemnetApp.assesemnetApp.entity.ReportEntity;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 @RestController
@@ -97,28 +101,32 @@ public class ReportController {
 	@Autowired
 	KeyRepository keyRepository;
 	
+	
+	@Autowired
+	ReportRepository reportRepository;
+	
         @GetMapping("/generate-pdf")
         public void generatePdf(@RequestParam("value") String value,@RequestParam("Id") String Id, HttpServletResponse response)throws Exception {
         	
         	//KeyEntity kentity = this.keyRepository.getById(Id);
         	System.out.print(Id);
         //System.out.print(this.encryptionService.AESdecrypt(value, Id));
-        	//StudentEntity studentDetails = this.studentService.fetchBystudentId(Long.valueOf(1154));
+        	StudentEntity studentDetails = this.studentService.fetchBystudentId(Long.valueOf(Id));
             try {
             	
             	
 				
-            	/* String title = "Sample Title";
+            	String title = "Sample Title";
                  String content = "Sample Content";
                  Object student = studentDetails;
-                 java.sql.Timestamp timestamp = studentDetails.getExamStartTime();
-                 Date date =  new java.util.Date(timestamp.getTime());
+             //    java.sql.Timestamp timestamp = studentDetails.getExamStartTime();
+            //     Date date =  new java.util.Date(timestamp.getTime());
 
-                 byte[] pdfBytes = pdfGeneratorService.generatePdf(title, content, student, date);
+                 byte[] pdfBytes = pdfGeneratorService.generatePdf(title, content, student);
 
                  response.setContentType("application/pdf");
                  response.setHeader("Content-Disposition", "attachment; filename=\"generated.pdf\"");
-                 response.getOutputStream().write(pdfBytes);*/
+                 response.getOutputStream().write(pdfBytes);
                  
                  
             } catch (Exception e) {
@@ -131,14 +139,24 @@ public class ReportController {
         @PostMapping("/generateReport")
         public void generateReport(@RequestBody GeneratereportRequestModel  generatereportRequestModel) throws Exception {
         	
-        	  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-              Date parsedDate = dateFormat.parse(generatereportRequestModel.getExamdate());
+        	List<ReportEntity> reportEntity =  this.reportRepository.findByExamId(generatereportRequestModel.getExamId());
+        	
+        	
+        	for (ReportEntity reop: reportEntity) {
+        		StudentEntity studentEntity = this.studentService.fetchBystudentId(reop.getStudentId());
+        		this.emailService.sendReportEamil(generatereportRequestModel.getExamId(), studentEntity.getStudentEmail(), reop.getStudentId());
+        		
+        	}
+        	
+        //	this.emailService.sendReportEamil(encans, ans.getStudent().getStudentEmail(), key);
+        	//  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            //  Date parsedDate = dateFormat.parse(generatereportRequestModel.getExamdate());
         	//Date date = new java.util.Date();
         	
-        java.util.List<AnswerEntity> answers = this.answerService.findByDateAndClientId(parsedDate, generatereportRequestModel.getClientId());
+      //  java.util.List<AnswerEntity> answers = this.answerService.findByDateAndClientId(parsedDate, generatereportRequestModel.getClientId());
         	
         	// this.answerService.findByDateAndClientId(java.util.Date(generatereportRequestModel.getExamdate()), generatereportRequestModel.getClientId());
-        for(AnswerEntity ans : answers) {
+     /** for(AnswerEntity ans : answers) {
         
       String  key = 	this.encryptionService.generateKey();
       String encans = this.encryptionService.AESencrypt(ans.toString(), key.trim());
@@ -147,7 +165,7 @@ public class ReportController {
         this.keyRepository.save(keyEntity);	
         System.out.print(key);
         	this.emailService.sendReportEamil(encans, ans.getStudent().getStudentEmail(), key);
-        }
+        }**/
        
         	
         	;

@@ -21,6 +21,7 @@ public class ClientEntity {
 	private Long examDuration;
 	private Long totalQuestionTobeShown;
 	private boolean isBlocked;
+	private String clientEmail; 
 
 	
 	public boolean isBlocked() {
@@ -43,6 +44,14 @@ public class ClientEntity {
 	}
 
 	
+	public String getClientEmail() {
+		return clientEmail;
+	}
+	public void setClientEmail(String clientEmail) {
+		this.clientEmail = clientEmail;
+	}
+
+
 	@SuppressWarnings("unchecked")
 	@OneToMany(mappedBy="questionId")
 	 List<QuestionEntity>question = new java.util.ArrayList();
@@ -70,7 +79,7 @@ public class ClientEntity {
 	
 	public ClientEntity(Long clientid, String clientname, String clientpassword, Long examDuration,
 			Long totalQuestionTobeShown, boolean isBlocked, List<QuestionEntity> question,
-			List<StudentEntity> student) {
+			List<StudentEntity> student, String clientEmail) {
 		super();
 		this.clientid = clientid;
 		this.clientname = clientname;
@@ -80,6 +89,7 @@ public class ClientEntity {
 		this.isBlocked = isBlocked;
 		this.question = question;
 		this.student = student;
+		this.clientEmail = clientEmail;
 	}
 	
 	public ClientEntity() {}
@@ -87,7 +97,7 @@ public class ClientEntity {
 	public String toString() {
 		return "ClientEntity [clientid=" + clientid + ", clientname=" + clientname + ", clientpassword="
 				+ clientpassword + ", examDuration=" + examDuration + ", totalQuestionTobeShown="
-				+ totalQuestionTobeShown + ", isBlocked=" + isBlocked + "]";
+				+ totalQuestionTobeShown + ", isBlocked=" + isBlocked + ", clientEmail=" + clientEmail +"]";
 	};
 	
 

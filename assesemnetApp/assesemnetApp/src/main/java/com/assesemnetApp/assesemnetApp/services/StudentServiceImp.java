@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
+import com.assesemnetApp.assesemnetApp.entity.ExamEntity;
 import com.assesemnetApp.assesemnetApp.entity.QuestionEntity;
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.StudentDetails;
 import com.assesemnetApp.assesemnetApp.model.student;
 import com.assesemnetApp.assesemnetApp.repository.ClientRepository;
+import com.assesemnetApp.assesemnetApp.repository.ExamRepository;
 import com.assesemnetApp.assesemnetApp.repository.StudentRepository;
 import com.assesmentApp.assesmentApp.error.StudentException;
 
@@ -35,6 +37,8 @@ public class StudentServiceImp implements StudentService {
 	EncryptionService encryptionService;
 	@Autowired
 	UtilsService utilsService;
+	@Autowired
+	ExamRepository examRepository;
 	@Override
 	public StudentEntity savestudent(StudentEntity student, Long clientId) {
 		// TODO Auto-generated method stub
@@ -72,7 +76,7 @@ public class StudentServiceImp implements StudentService {
 			StudentEntity stu = new StudentEntity();
 			System.out.print(st.getClientId());
 			client = ClientRepo.findById(st.getClientId()).orElseThrow(() -> new IllegalArgumentException("Invalid Client ID for" +st.getClientId()));
-			
+			ExamEntity exam = examRepository.findById(st.getExamId()).orElseThrow(() -> new IllegalArgumentException("Invalid Exam ID for" +st.getExamId()));
 			 String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
 		        String pwd =   RandomStringUtils.random(10, characters);
 		        
@@ -80,12 +84,12 @@ public class StudentServiceImp implements StudentService {
 			stu.setStudentEnrollmentNo(st.getStudentEnrollmentNo());
 			stu.setStudentMobileNumber(st.getStudentMobileNumber());
 			stu.setStudentBranch(st.getStudentBranch());
-		
+			//stu.setExam(exam);
 				try {
 				//	LocalDate d = this.utilsService.parseSqlDate(st.getExamEndTime());
 					// System.out.printf("local", );
-					stu.setExamEndTime(this.utilsService.parseSqlDate(st.getExamEndTime()));
-					stu.setExamStartTime(this.utilsService.parseSqlDate(st.getExamStartTime()));
+				//	stu.setExamEndTime(this.utilsService.parseSqlDate(st.getExamEndTime()));
+				//	stu.setExamStartTime(this.utilsService.parseSqlDate(st.getExamStartTime()));
 				} catch (DateTimeParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -95,6 +99,7 @@ public class StudentServiceImp implements StudentService {
 			
 			stu.setClient(client);
 			stu.setPwd(pwd);
+			stu.setExam(exam);
 			
 			try {
 				String baseUrl = "http://52.207.59.58/login";

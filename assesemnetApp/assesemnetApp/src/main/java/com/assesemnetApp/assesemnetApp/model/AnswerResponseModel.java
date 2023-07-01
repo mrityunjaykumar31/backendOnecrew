@@ -13,6 +13,7 @@ public class AnswerResponseModel {
 	private String endTime;
 	private Long studentId;
 	private Long clientid;
+	private Long examId;
 	
 	public Long getStudentId() {
 		return studentId;
@@ -46,20 +47,29 @@ public class AnswerResponseModel {
 	public void setClientid(Long clientid) {
 		this.clientid = clientid;
 	}
-	public AnswerResponseModel(List<Answer> answer, String startTime, String endTime, Long studentId, Long clientid) {
+	
+	
+	public Long getExamId() {
+		return examId;
+	}
+	public void setExamId(Long examId) {
+		this.examId = examId;
+	}
+	public AnswerResponseModel(List<Answer> answer, String startTime, String endTime, Long studentId, Long clientid, Long examId) {
 		super();
 		this.answer = answer;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.studentId = studentId;
 		this.clientid = clientid;
+		this.examId = examId;
 	}
 	
 	public AnswerResponseModel(){}
 	@Override
 	public String toString() {
 		return "AnswerResponseModel [answer=" + answer + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", studentId=" + studentId + ", clientid=" + clientid + "]";
+				+ ", studentId=" + studentId + ", clientid=" + clientid + ", examId="+examId+"]";
 	}
 	
 	

@@ -34,12 +34,9 @@ public class PdfGeneratorService {
         this.templateEngine = templateEngine;
     }
 
-    public byte[] generatePdf(String title, String content, Object student, Date date) throws Exception {
+    public byte[] generatePdf(String title, String content, Object student) throws Exception {
     	   // Create a dataset with sample data
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Category 1", 25);
-        dataset.setValue("Category 2", 50);
-        dataset.setValue("Category 3", 75);
+      
 
         // Create the chart
        /* JFreeChart chart = ChartFactory.createPieChart("Sample Pie Chart", dataset, true, true, false);
@@ -55,9 +52,9 @@ public class PdfGeneratorService {
         Context context = new Context();
         context.setVariable("title", "mk");
         context.setVariable("content", content);
-        context.setVariable("skill", "testsssss");
+        context.setVariable("skill", student);
         context.setVariable("student", student);
-        context.setVariable("examTime", date );
+        
       //  context.setVariable("chart", chart );
 
         String html = templateEngine.process("template", context);

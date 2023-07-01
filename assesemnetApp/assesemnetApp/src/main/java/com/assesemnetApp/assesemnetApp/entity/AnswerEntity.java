@@ -34,11 +34,12 @@ public class AnswerEntity {
 
 	private Timestamp startTime;
 	private Timestamp endTime;
+	private Long examId;
 
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "answerEntity")
 	private List<GivenAnswerEntity> givenAnswerEntity;
 	
-	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student,  Timestamp startTime, Timestamp endTime) {
+	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student,  Timestamp startTime, Timestamp endTime, Long examId) {
 		super();
 		this.answerid = answerid;
 		this.student = student;
@@ -46,6 +47,7 @@ public class AnswerEntity {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.client = client;
+		this.examId = examId;
 	}
 
 
@@ -68,10 +70,22 @@ public class AnswerEntity {
 
 
 
+	public Long getExamId() {
+		return examId;
+	}
+
+
+
+	public void setExamId(Long examId) {
+		this.examId = examId;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "AnswerEntity [answerid=" + answerid + ",  startTime="
-				+ startTime + ", endTime=" + endTime + ", studentId=" + student.toString() + "]";
+				+ startTime + ", endTime=" + endTime + ", studentId=" + student.toString() + ", examId="+examId+"]";
 	}
 
 	public Timestamp getEndTime() {

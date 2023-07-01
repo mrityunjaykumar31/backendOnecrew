@@ -32,6 +32,15 @@ public class student {
 	private boolean isAttendentPsychometricTestBefore;
 	private String examStartTime;
 	private String examEndTime;
+	private Long examId;
+	
+	
+	public Long getExamId() {
+		return examId;
+	}
+	public void setExamId(Long examId) {
+		this.examId = examId;
+	}
 	public Long getClientId() {
 		return clientId;
 	}
@@ -213,8 +222,9 @@ public class student {
 			Long studentMarks, String studentGender, String studentState, Date studentDob, String examTime, Long emrno,
 			String orgName, String institutionName, Long aadharNumber, String panNo, String state, Long pinCode,
 			String highestQual, Long yearOfPassing, boolean isAttendentPsychometricTestBefore, String examStartTime,
-			String examEndTime) {
+			String examEndTime, Long examId) {
 		super();
+		this.examId = examId;
 		this.clientId = clientId;
 		this.studentFirstname = studentFirstname;
 		this.studentLastname = studentLastname;
@@ -261,7 +271,7 @@ public class student {
 				+ ", aadharNumber=" + aadharNumber + ", panNo=" + panNo + ", state=" + state + ", pinCode=" + pinCode
 				+ ", highestQual=" + highestQual + ", yearOfPassing=" + yearOfPassing
 				+ ", isAttendentPsychometricTestBefore=" + isAttendentPsychometricTestBefore + ", examStartTime="
-				+ examStartTime + ", examEndTime=" + examEndTime + "]";
+				+ examStartTime + ", examEndTime=" + examEndTime + ", examId=" + examId + "]";
 	}
 
 	

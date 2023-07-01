@@ -117,6 +117,7 @@ public class StudentController {
 			studentDetils.setStudentMobileNumber(student.getStudentMobileNumber());
 			studentDetils.setYearOfPassing(student.getYearOfPassing());
 			studentDetils.setStudentFatherName(student.getStudentFatherName());
+			studentDetils.setExamId(student.getExam().getExamId());
 			res.setMessage(null);
 			res.setSuccess(true);
 			res.setStudentDetails(studentDetils);

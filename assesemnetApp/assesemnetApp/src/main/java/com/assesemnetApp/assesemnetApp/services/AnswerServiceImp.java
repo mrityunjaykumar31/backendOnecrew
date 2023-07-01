@@ -11,11 +11,13 @@ import org.springframework.stereotype.Service;
 import com.assesemnetApp.assesemnetApp.entity.AnswerEntity;
 import com.assesemnetApp.assesemnetApp.entity.ClientEntity;
 import com.assesemnetApp.assesemnetApp.entity.GivenAnswerEntity;
+import com.assesemnetApp.assesemnetApp.entity.ReportEntity;
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.Answer;
 import com.assesemnetApp.assesemnetApp.model.AnswerResponseModel;
 import com.assesemnetApp.assesemnetApp.repository.AnswerRepository;
 import com.assesemnetApp.assesemnetApp.repository.ClientRepository;
+import com.assesemnetApp.assesemnetApp.repository.ReportRepository;
 import com.assesemnetApp.assesemnetApp.repository.StudentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,6 +35,9 @@ public class AnswerServiceImp implements AnswerService  {
 	 private ObjectMapper jacksonObjectMapper;
 	@Autowired
 	private UtilsService utilsService;
+	@Autowired
+	private ReportRepository reportRepository;
+	
 
 	@Override
 	public AnswerEntity saveAnswer(AnswerResponseModel answerResponseModel) {
@@ -79,8 +84,12 @@ public class AnswerServiceImp implements AnswerService  {
 		ans.setStartTime(Timestamp.valueOf(answerResponseModel.getStartTime()));
 		//ans.setTimeStamp(null);
 		ans.setClient(client);
-		
+		ans.setExamId(answerResponseModel.getExamId());
 	//	ans.setGivenAnswerEntity(answerResponseModel.getAnswer());
+		ReportEntity report =  new ReportEntity();
+		report.setExamId(answerResponseModel.getExamId());
+		report.setStudentId(answerResponseModel.getStudentId());
+		this.reportRepository.save(report);
 		return AnsRepo.save(ans);
 	}
 

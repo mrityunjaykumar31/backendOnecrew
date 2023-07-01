@@ -26,5 +26,5 @@ public class Login {
 	 String url = "http://52.207.59.58/login"+this.encryptionService.encrypt("mk");
 	//this.emailService.sendHtmlEmail("mrityunjaykumar31@gmail.com", "test", url);
 	}
-
+	
 }
