@@ -28,4 +28,5 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Long>{
 	
 	//Query( native = true,"SELECT s FROM QuestionEntity s WHERE s.questionStream = :questionStream AND s.clientId =:clientId")
 	//List<QuestionEntity> getQuestionStreamAndClientId(@Param("questionStream")String questionStream, @Param("clientId") String clientId);
+	public QuestionEntity findByQuestionId(Long id);
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +61,10 @@ import java.io.OutputStream;
 import com.assesemnetApp.assesemnetApp.entity.StudentEntity;
 import com.assesemnetApp.assesemnetApp.model.GeneratereportRequestModel;
 import com.assesemnetApp.assesemnetApp.model.StudentDetails;
+import com.assesemnetApp.assesemnetApp.model.answerJoinModel;
+
+import com.assesemnetApp.assesemnetApp.repository.AnswerRepository;
+import com.assesemnetApp.assesemnetApp.repository.GivenAnswerRepository;
 import com.assesemnetApp.assesemnetApp.repository.KeyRepository;
 import com.assesemnetApp.assesemnetApp.repository.ReportRepository;
 import com.assesemnetApp.assesemnetApp.services.AnswerService;
@@ -68,9 +73,12 @@ import com.assesemnetApp.assesemnetApp.services.EncryptionService;
 import com.assesemnetApp.assesemnetApp.services.PdfGeneratorService;
 import com.assesemnetApp.assesemnetApp.services.ReportService;
 import com.assesemnetApp.assesemnetApp.services.StudentService;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.*;
 //import com.itextpdf.text.pdf.PdfWriter;
 import com.assesemnetApp.assesemnetApp.entity.AnswerEntity;
+import com.assesemnetApp.assesemnetApp.entity.GivenAnswerEntity;
 import com.assesemnetApp.assesemnetApp.entity.KeyEntity;
 import com.assesemnetApp.assesemnetApp.entity.ReportEntity;
 
@@ -105,6 +113,41 @@ public class ReportController {
 	@Autowired
 	ReportRepository reportRepository;
 	
+	@Autowired
+	 private ObjectMapper jacksonObjectMapper;
+	
+	@Autowired
+	private GivenAnswerRepository givenAnswerRepository;
+	
+	@Autowired
+	private AnswerRepository answerRepository;
+	
+
+	@GetMapping("/x")
+	public ResponseEntity <List<GivenAnswerEntity>>test() {
+		List <AnswerEntity> an = this.answerService.getx();
+		List<GivenAnswerEntity> gan =	this.givenAnswerRepository.findByAnswerEntity_Answerid(an.get(0).getAnswerid());
+		
+		String jsonInString = null;
+		
+		try {
+			System.out.print("try");
+			//System.out.print(an);
+			ObjectMapper objectMapper = new ObjectMapper();
+			//jacksonObjectMapper.configure(DeserializationFeature, false);
+
+			//jsonInString = jacksonObjectMapper.writeValueAsString(an.get(0).getGivenAnswerEntity());
+		//	System.out.print("System.out.print(jsonInString);");
+			//System.out.print(an);
+		}catch(Exception e){
+			System.out.print(e);
+		}
+	//	this.answerRepository.getx();
+		return ResponseEntity.ok(gan);
+
+	}
+	
+	
         @GetMapping("/generate-pdf")
         public void generatePdf(@RequestParam("value") String value,@RequestParam("Id") String Id, HttpServletResponse response)throws Exception {
         	
@@ -112,6 +155,11 @@ public class ReportController {
         	System.out.print(Id);
         //System.out.print(this.encryptionService.AESdecrypt(value, Id));
         	StudentEntity studentDetails = this.studentService.fetchBystudentId(Long.valueOf(Id));
+			/*
+			 * List<answerJoinModel> ans=
+			 * this.answerService.findByStudentExamAndClient(Long.valueOf(1202),
+			 * Long.valueOf(1), Long.valueOf(1));
+			 */
             try {
             	
             	

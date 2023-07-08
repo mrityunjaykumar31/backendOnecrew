@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 
 import com.assesemnetApp.assesemnetApp.model.Answer;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,56 +37,53 @@ public class AnswerEntity {
 	private Timestamp endTime;
 	private Long examId;
 
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "answerEntity")
-	private List<GivenAnswerEntity> givenAnswerEntity;
-	
-	public AnswerEntity(Long answerid, ClientEntity client, StudentEntity student,  Timestamp startTime, Timestamp endTime, Long examId) {
+
+	public AnswerEntity(Long answerid, StudentEntity student, ClientEntity client, Timestamp startTime,
+			Timestamp endTime, Long examId) {
 		super();
 		this.answerid = answerid;
 		this.student = student;
-		
+		this.client = client;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.client = client;
 		this.examId = examId;
 	}
 
+	public AnswerEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	public Long getAnswerid() {
+		return answerid;
+	}
+
+	public void setAnswerid(Long answerid) {
+		this.answerid = answerid;
+	}
+
+	public StudentEntity getStudent() {
+		return student;
+	}
+
+	public void setStudent(StudentEntity student) {
+		this.student = student;
+	}
+
+	public ClientEntity getClient() {
+		return client;
+	}
+
+	public void setClient(ClientEntity client) {
+		this.client = client;
+	}
 
 	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	
-
-	public Timestamp getsetStartTimes() {
-		return startTime;
-	}
-
 	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
-	}
-
-	
-
-
-
-	public Long getExamId() {
-		return examId;
-	}
-
-
-
-	public void setExamId(Long examId) {
-		this.examId = examId;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "AnswerEntity [answerid=" + answerid + ",  startTime="
-				+ startTime + ", endTime=" + endTime + ", studentId=" + student.toString() + ", examId="+examId+"]";
 	}
 
 	public Timestamp getEndTime() {
@@ -96,57 +94,20 @@ public class AnswerEntity {
 		this.endTime = endTime;
 	}
 
-	public AnswerEntity(){}
+	public Long getExamId() {
+		return examId;
+	}
+
+	public void setExamId(Long examId) {
+		this.examId = examId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "AnswerEntity [answerid=" + answerid + ", student=" + student.toString() + ", client=" + client + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", examId=" + examId + "]";
+	}
 	
-
-	public Long getAnswerid() {
-		return answerid;
-	}
-
-	public void setAnswerid(Long answerid) {
-		this.answerid = answerid;
-	}
-
-	
-
-	public StudentEntity getStudent() {
-		return student;
-	}
-
-	public void setStudent(StudentEntity student) {
-		this.student = student;
-	}
-
-
-
-	public ClientEntity getClient() {
-		return client;
-	}
-
-
-
-	public void setClient(ClientEntity client) {
-		this.client = client;
-	}
-
-
-
-	public void setAnswer(List<Answer> answer) {
-		// TODO Auto-generated method stub
 		
-	}
-
-
-
-	public List<GivenAnswerEntity> getGivenAnswerEntity() {
-		return givenAnswerEntity;
-	}
-
-
-
-	public void setGivenAnswerEntity(List<GivenAnswerEntity> givenAnswerEntity) {
-		this.givenAnswerEntity = givenAnswerEntity;
-	}
-
-	
 }
